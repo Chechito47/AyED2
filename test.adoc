@@ -1,3 +1,7 @@
+== Test de asciidoc
+Creo archivo nuevo con +ctrl, alt, n+
+
+
 == Titulo 1
 text
 
@@ -48,3 +52,13 @@ ID,FName,LName,Address,Phone
 1,Vasya,Pupkin,London,+123
 2,X,Y,"A,B",45678
 |===========================
+
+.code
+----
+c++
+
+if (a == b) {
+  algo;
+  a++;
+}
+----
