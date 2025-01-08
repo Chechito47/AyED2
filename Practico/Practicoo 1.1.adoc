@@ -1,0 +1,50 @@
+== Titulo 1
+text
+
+=== Titulo 2
+text
+
+==== Titulo 3
+text
+
+===== Titulo 4
+text
+
+
+.Titulo de parrafo
+texto
+termino.
+
+.titulo de nota
+NOTE: text
+
+.list
+  1. primero.
+  2. segundo.
+
+.text
+normal, _italic_, 'italic', *bold*.
++mono *bold*+, `mono pass through *bold*`
+normal, ^super^, ~sub~
+
+''''
+
+.list2
+term1;;
+  Definition1
+  term1.1::
+    Definition1.1
+
+[qanda]
+.Q&A
+Question1::
+  Answer 1
+Question2:: Answer2
+
+[format="csv"]
+[options="header",cols=",,s,,m"]
+|===========================
+ID,FName,LName,Address,Phone
+1,Vasya,Pupkin,London,+123
+2,X,Y,"A,B",45678
+|===========================
