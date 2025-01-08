@@ -1,0 +1,3 @@
+== Practico 1.1
+
+image::Practico1/Imagenes/ej1.png[]
