@@ -1,3 +1,3 @@
 == Practico 1.1
 
-image::Practico%201/Imagenes/ej1.png[]
+image::Imagenes%20practico%201/ej1.png[]
