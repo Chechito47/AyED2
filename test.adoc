@@ -53,10 +53,9 @@ ID,FName,LName,Address,Phone
 2,X,Y,"A,B",45678
 |===========================
 
+[source, c++]
 .code
 ----
-c++
-
 if (a == b) {
   algo;
   a++;
