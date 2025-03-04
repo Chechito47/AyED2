@@ -1,3 +1,0 @@
-== Practico 1.1
-
-image::Imagenes%20practico%201/ej1.png[]

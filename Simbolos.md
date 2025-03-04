@@ -1,0 +1,1 @@
+<ctrl shift u 03a3> -> Σ

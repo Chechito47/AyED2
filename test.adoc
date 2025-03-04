@@ -61,3 +61,5 @@ if (a == b) {
   a++;
 }
 ----
+
+image::Imagenes%20practico%201.1/ej1.png[]
