@@ -12,7 +12,7 @@ Ya que la uso como valor de entrada para otra variable
 
 a) Inicializar cada componente del arreglo con el valor 0
 ```
-
+.
 <pre><code class="language-pascal">
 <b>proc</b> init0 (<b>out</b> a: <b>array</b>[1..N ] <b>of nat</b>)
 	<b>for</b> i := 1 <b>to</b> N <b>do</b>
@@ -71,11 +71,15 @@ d) Incrementar las posiciones impares y dejar intactas las pares
 
 ![ScreenShot](Imagenes%20practico%201.1/ej2.png)
 ```pascal
+Las anteriores ya las hice con for
 d) Incrementar las posiciones impares y dejar intactas las pares
 ```
 
-> **proc** inc_impar (**in/out** a: array[1..n] **of nat**)  
->>	**for** i:=1 **to** n **do**  
+
+
+
+**proc** inc_impar (**in/out** a: array[1..n] **of nat**)  
+	**for** i:=1 **to** n **do**  
 		**if** (i mod 2 == 1) **then**  
 			a[i] = a[i] + 1  
 		**fi**  
