@@ -15,12 +15,12 @@ a) Inicializar cada componente del arreglo con el valor 0
 ```
 
 <pre><code class="language-pascal">
-<b>proc</b> init0 (<b>out</b> a: <b> array</b>[1..N ] <b>of nat</b>)
+<b>proc</b> init0 (<b>out</b> a: <b>array</b>[1..N ] <b>of nat</b>)
 	<b>for</b> i := 1 <b>to</b> N <b>do</b>
 		a[i] := 0
 	<b>od</b>
 <b>end proc</b>
-</pre></code>
+</code></pre>
 
 
 ```pascal
