@@ -29,35 +29,17 @@ CASO RECURSIVO: n > 0 => fac = fac(n-1)
 </code></pre>
 
 
+El valor de **i** es importante en el siguiente código:
 
-
-<pre><code class="language-pascal">var i: Integer;
+```pascal
+var i: Integer;
 begin
    i := 1;
+end.
+```
+
+
+<pre><code class="language-pascal">var <b>i</b>: Integer;
+begin
+   <b>i</b> := 1;
 end.</code></pre>
-
-
-
-
-**fun** factorial(n: nat) **ret** f: nat
-	**if** n = 0
-		**then** f := 1
-	**else** f := n * factorial(n-1)
-	**fi**
-**end fun**
-
-
-
-
-### Resaltado de sintaxis:
-Si lo que deseas es **resaltar sintaxis** (por ejemplo, en GitHub, GitLab, o en tu generador de sitios que lo soporte), la forma correcta de hacerlo es especificar el lenguaje como te mencioné antes, pero fuera de la etiqueta `<code>`, así:
-
-```markdown
-```html
-<pre><code>Este es un bloque de código con etiquetas HTML y negrita.</code></pre>
-```
-
-
-```html
-<code>Este es un bloque de código con <b>negrita</b> en HTML.</code>
-```
