@@ -16,7 +16,7 @@ CASO RECURSIVO: n > 0 => fac = fac(n-1)
 	**fi**
 **end fun**
 
-
+```pascal
 
 <pre><code>
 <b>fun</b> factorial(n: nat) <b>ret</b> f: nat
@@ -27,7 +27,7 @@ CASO RECURSIVO: n > 0 => fac = fac(n-1)
 <b>end fun</b>
 
 </code></pre>
-
+```
 
 
 **fun** factorial(n: nat) **ret** f: nat
@@ -46,3 +46,9 @@ Si lo que deseas es **resaltar sintaxis** (por ejemplo, en GitHub, GitLab, o en 
 ```markdown
 ```html
 <pre><code>Este es un bloque de código con etiquetas HTML y negrita.</code></pre>
+```
+
+
+```html
+<code>Este es un bloque de código con <b>negrita</b> en HTML.</code>
+```
