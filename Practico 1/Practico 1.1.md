@@ -1,103 +1,85 @@
 ![ScreenShot](Imagenes%20practico%201.1/ej1.png)
 
-**Ejercicio 1**
-```java
+
+```pascal
+Recordemos, si voy a usar la variable en el lado izquierdo debe ser de tipo out:
+x = 2
+Ya que le uso para como valor de salida para otra variable o valor
+
+Pero si lo voy a usar del lado derecho debe ser de tipo in:
+y = x
+Ya que la uso como valor de entrada para otra variable
+
+
 a) Inicializar cada componente del arreglo con el valor 0
+```
+<pre><code class="language-pascal">
+<b>proc</b> init0 (<b>out</b> a: <b> array</b>[1..N ] <b>of nat</b>)
+	<b>for</b> i := 1 <b>to</b> N <b>do</b>
+		a[i] := 0
+	<b>od</b>
+<b>end proc</b>
+</pre></code>
 
-proc init0 (out a :array[1..n] of nat)
-	for i <= n do
-		a[i] = 0
-	od
-end proc
-
-
-
+```pascal
 b) Inicializar el arreglo con los primeros n numeros naturales positivos
+```
 
-proc initpospos (out a: array[1..n] of nat)
-	var i: nat
-	i := 1
-	while i <= n do
-		a[i] := i
-		i++
-	od
-end proc
+<pre><code class="language-pascal">
+<b>proc</b> init_nat (<b>out</b> a: <b>array</b>[1..N] <b>of nat</b>)
+	<b>var</b> j: nat
+	j := 1
+	<b>for</b> i <b>to</b> N <b>do</b>
+		a[i] := j
+		j := j + 1
+	<b>od</b>
+<b>end proc</b>
+</code></pre>
 
 
 
+```pascal
 c) Inicializar el arreglo con los primeros n numeros naturales impares
+```
+<pre><code class="language-pascal">
+<b>proc</b> init_impar (<b>out</b> a: <b>array</b>[1..N] <b>of nat</b>)
+	<b>var</b> j: nat
+	j := 1
+	<b>for</b> i <b>to</b> N <b>do</b>
+		a[i] := j
+		j := j + 2
+	<b>od</b>
+<b>end proc</b>
+</code></pre>
 
-proc initposimp (out a: array[1..n] of nat)
-	var i: nat
-	i:=1
-	while i <= n do
-		a[i] := 2 * i - 1
-		i++
-	od
-end proc 
 
-
-
+```pascal
 d) Incrementar las posiciones impares y dejar intactas las pares
-
-proc incimpar (in/out: a[1..n] of nat)
-	var i: nat
+```
+<pre><code class="language-pascal">
+<b>proc</b> inc_impar (<b>in/out</b>: a[1..N] <b>of nat</b>)
+	<b>var</b> i: nat
 	i := 1
-	while i <= n do
+	<b>while</b> i &lt;= N <b>do</b>
 		a[i] = a[i] + 1
 		i := i + 2
-	od
-end proc 
-```
+	<b>od</b>
+<b>end proc</b>
+</code></pre>
 
 
 ![ScreenShot](Imagenes%20practico%201.1/ej2.png)
-
-```java
-a) Inicializar todos los elementos del arreglo en 0
-
-proc init0 (out a: array[1..n] of nat)
-	var i: nat
-	for i:=1 to n do
-		a[i] = 0
-	od
-end proc
-
-
-
-b) Inicializar el arreglo con los primernos n numeros naturales positivos
-
-proc initpos (out a: array[1..n] of nat)
-	var i: nat
-	for i:=1 to n do
-		a[i] = i
-	od
-end proc
-
-
-
-c) Inicializar el arreglo con los primeros n numeros naturales impares
-
-proc initimp (out a: array[1..n] of nat)
-	var i: nat
-	for i:=1 to n do
-		a[i] = 2 * i -1
-	od
-end proc
-
-
-
+```pascal
 d) Incrementar las posiciones impares y dejar intactas las pares
-
-proc incpar (in/out a: array[1..n] of nat)
-	var i: nat
-	for i:=1 to n do
-		if (i mod 2 == 1) then
-			a[i] = a[i] + 1
-		fi
-	od
-end proc
 ```
+
+**proc** inc_impar (**in/out** a: array[1..n] **of nat**)  
+	**for** i:=1 **to** n **do**  
+		**if** (i mod 2 == 1) **then**  
+			a[i] = a[i] + 1  
+		**fi**  
+	**od**  
+**end proc**  
 
 
 ![ScreenShot](Imagenes%20practico%201.1/ej3.png)

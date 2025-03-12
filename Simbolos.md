@@ -11,10 +11,3 @@ graph TD;
 
 
 
-```python title:"Title of the code block"
-print("Hello world")
-```
-
-```result
-hdisadas
-```
