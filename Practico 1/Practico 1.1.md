@@ -28,48 +28,14 @@ a) Inicializar cada componente del arreglo con el valor 0
 b) Inicializar el arreglo con los primeros n numeros naturales positivos
 ```
 
-<pre><code class="language-pascal">
-<b>proc</b> init_nat (<b>out</b> a: <b>array</b>[1..N] <b>of nat</b>)
-	<b>var</b> j: nat
-	j := 1
-	<b>for</b> i <b>to</b> N <b>do</b>
-		a[i] := j
-		j := j + 1
-	<b>od</b>
-<b>end proc</b>
-</code></pre>
-
 
 ```pascal
 c) Inicializar el arreglo con los primeros n numeros naturales impares
 ```
 
-<pre><code class="language-pascal">
-<b>proc</b> init_impar (<b>out</b> a: <b>array</b>[1..N] <b>of nat</b>)
-	<b>var</b> j: nat
-	j := 1
-	<b>for</b> i <b>to</b> N <b>do</b>
-		a[i] := j
-		j := j + 2
-	<b>od</b>
-<b>end proc</b>
-</code></pre>
-
 ```pascal
 d) Incrementar las posiciones impares y dejar intactas las pares
 ```
-
-<pre><code class="language-pascal">
-<b>proc</b> inc_impar (<b>in/out</b>: a[1..N] <b>of nat</b>)
-	<b>var</b> i: nat
-	i := 1
-	<b>while</b> i &lt;= N <b>do</b>
-		a[i] = a[i] + 1
-		i := i + 2
-	<b>od</b>
-<b>end proc</b>
-</code></pre>
-
 
 ![ScreenShot](Imagenes%20practico%201.1/ej2.png)
 ```pascal
