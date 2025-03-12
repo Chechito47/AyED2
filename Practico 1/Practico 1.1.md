@@ -1,5 +1,13 @@
 ![ScreenShot](Imagenes%20practico%201.1/ej1.png)
 
+<pre><code class="language-pascal">
+<b>fun</b> factorial(n: nat) <b>ret</b> f:nat
+	f := 1
+	<b>for</b> i := 1 <b>to</b> n <b>do</b>
+		f := f * i
+		<b>od</b>
+	<b>end fun</b>
+	</code></pre>
 
 ```pascal
 Recordemos, si voy a usar la variable en el lado izquierdo debe ser de tipo out:
