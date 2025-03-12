@@ -1,4 +1,3 @@
-Practico 1.1
 
 ![ScreenShot](Imagenes%20practico%201.1/ej1.png)
 
@@ -14,7 +13,7 @@ Ya que la uso como valor de entrada para otra variable
 
 a) Inicializar cada componente del arreglo con el valor 0
 ```
-.
+
 <pre><code class="language-pascal">
 <b>proc</b> init0 (<b>out</b> a: <b>array</b>[1..N ] <b>of nat</b>)
 	<b>for</b> i := 1 <b>to</b> N <b>do</b>
