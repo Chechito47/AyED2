@@ -16,8 +16,6 @@ CASO RECURSIVO: n > 0 => fac = fac(n-1)
 	**fi**
 **end fun**
 
-
-
 <pre><code class="language-pascal">
 <b>fun</b> factorial(n: nat) <b>ret</b> f: nat
 	<b>if</b> n = 0
@@ -27,6 +25,8 @@ CASO RECURSIVO: n > 0 => fac = fac(n-1)
 <b>end fun</b>
 
 </code></pre>
+
+
 
 
 El valor de **i** es importante en el siguiente código:
@@ -39,7 +39,7 @@ end.
 ```
 
 
-<pre><code class="language-pascal">var <b>i</b>: Integer;
+<pre><code class="language-pascal"><font color="#8064a2">var</font> <b>i</b>: Integer;
 begin
    <b>i</b> := 1;
 end.</code></pre>
