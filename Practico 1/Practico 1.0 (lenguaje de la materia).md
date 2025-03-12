@@ -104,8 +104,6 @@ Similar al anterior, cambio el =0 para sumar 1
 <b>end proc</b>
 </code></pre>
 
-![ScreenShot](Imagenes%20practico%201.1/ej1.png)
-
 ```pascal
 5) Función para encontrar el mínimo elemento de un arreglo
 Encabezado: fun min(a: array[1..N] of int) ret m : int
