@@ -13,6 +13,7 @@ Ya que la uso como valor de entrada para otra variable
 
 a) Inicializar cada componente del arreglo con el valor 0
 ```
+
 <pre><code class="language-pascal">
 <b>proc</b> init0 (<b>out</b> a: <b> array</b>[1..N ] <b>of nat</b>)
 	<b>for</b> i := 1 <b>to</b> N <b>do</b>
@@ -20,6 +21,7 @@ a) Inicializar cada componente del arreglo con el valor 0
 	<b>od</b>
 <b>end proc</b>
 </pre></code>
+
 
 ```pascal
 b) Inicializar el arreglo con los primeros n numeros naturales positivos
@@ -37,10 +39,10 @@ b) Inicializar el arreglo con los primeros n numeros naturales positivos
 </code></pre>
 
 
-
 ```pascal
 c) Inicializar el arreglo con los primeros n numeros naturales impares
 ```
+
 <pre><code class="language-pascal">
 <b>proc</b> init_impar (<b>out</b> a: <b>array</b>[1..N] <b>of nat</b>)
 	<b>var</b> j: nat
@@ -52,10 +54,10 @@ c) Inicializar el arreglo con los primeros n numeros naturales impares
 <b>end proc</b>
 </code></pre>
 
-
 ```pascal
 d) Incrementar las posiciones impares y dejar intactas las pares
 ```
+
 <pre><code class="language-pascal">
 <b>proc</b> inc_impar (<b>in/out</b>: a[1..N] <b>of nat</b>)
 	<b>var</b> i: nat
