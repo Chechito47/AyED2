@@ -74,7 +74,7 @@ d) Incrementar las posiciones impares y dejar intactas las pares
 d) Incrementar las posiciones impares y dejar intactas las pares
 ```
 
-**proc** inc_impar (**in/out** a: array[1..n] **of nat**)  
+> **proc** inc_impar (**in/out** a: array[1..n] **of nat**)  
 	**for** i:=1 **to** n **do**  
 		**if** (i mod 2 == 1) **then**  
 			a[i] = a[i] + 1  
