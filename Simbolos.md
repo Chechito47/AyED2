@@ -1,3 +1,5 @@
+Ponerle nombre a los practicos despues de los nros, caso contrario no funciona el highlight de html
+
 <ctrl shift u 03a3> -> Σ
 
 
