@@ -16,9 +16,9 @@ CASO RECURSIVO: n > 0 => fac = fac(n-1)
 	**fi**
 **end fun**
 
-```pascal
 
-<pre><code>
+
+<pre><code class="language-pascal">
 <b>fun</b> factorial(n: nat) <b>ret</b> f: nat
 	<b>if</b> n = 0
 		<b>then</b> f := 1
@@ -27,7 +27,16 @@ CASO RECURSIVO: n > 0 => fac = fac(n-1)
 <b>end fun</b>
 
 </code></pre>
-```
+
+
+
+
+<pre><code class="language-pascal">var i: Integer;
+begin
+   i := 1;
+end.</code></pre>
+
+
 
 
 **fun** factorial(n: nat) **ret** f: nat
