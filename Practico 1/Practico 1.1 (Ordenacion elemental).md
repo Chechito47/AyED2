@@ -76,34 +76,32 @@ Las anteriores ya las hice con for
 d) Incrementar las posiciones impares y dejar intactas las pares
 ```
 
-
-
-
-**proc** inc_impar (**in/out** a: array[1..n] **of nat**)  
-	**for** i:=1 **to** n **do**  
-		**if** (i mod 2 == 1) **then**  
-			a[i] = a[i] + 1  
-		**fi**  
-	**od**  
-**end proc**  
-
+<pre><code class="language-pascal">
+<b>proc</b> inc_impar(<b>in/out</b> a: <b>array</b>[1..N] <b>of nat</b>)
+	<b>for</b> i := 1 <b>to</b> N <b>do</b>
+		<b>if</b> (i mod 2 == 1) <b>then</b>
+			a[i] = a[i] + 1
+		<b>fi</b>
+	<b>od</b>
+</code></pre> 
 
 ![ScreenShot](Imagenes%20practico%201.1/ej3.png)
 
-```java
-proc verordenado (in a: array[1..n] of nat, out o: bool)
-	o := true
+<pre><code class="language-pascal">
+<b>proc</b> determinar_ordenado(<b>in</b> a:<b>array</b>[1..N] <b>of nat</b>, <b>out</b> res: bool)
+	res := true
+	<b>if</b> n &gt; 1 <b>then</b>
+		<b>for</b> i := 1 <b>to</b> N-1 <b>do</b>
+			<b>if</b> a[i] > a[i+1]
+				res := false
+				<b>exit</b>
+			<b>fi</b>
+		<b>od</b>
+	<b>fi</b>
+<b>end proc</b>
+</code></pre>
 
-	if n>1 then    //Check for an array with two elements at least
-		for i:=1 to n-1 do
-			if (a[i] > a[i+1])
-				o := False
-				exit
-			fi
-		od
-	fi
-end proc
-
+```pascal
 ¿Que hace?
 El algoritmo verifica si el arreglo "a" esta ordenado de menor a mayor
 
@@ -400,25 +398,26 @@ ops(nat)= nose
 
 ![ScreenShot](Imagenes%20practico%201.1/ej9.png)
 
+<pre><code class="language-pascal">
+<b>proc</b> determinar_ordenado(<b>in</b> a:<b>array</b>[1..N] <b>of nat</b>, <b>out</b> res: bool)
+	res := true
+	<b>if</b> n &gt; 1 <b>then</b>
+		<b>for</b> i := 1 <b>to</b> N-1 <b>do</b>
+			<b>if</b> a[i] > a[i+1]
+				res := false
+				<b>exit</b>
+			<b>fi</b>
+		<b>od</b>
+	<b>fi</b>
+<b>end proc</b>
+</code></pre>
+
 ```pascal
-proc verordenado (in a: array[1..n] of nat, out o: bool)
-	o := true
-
-	if n>1 then    //Check for an array with two elements at least
-		for i:=1 to n-1 do
-			if (a[i] > a[i+1])
-				o := False
-				exit
-			fi
-		od
-	fi
-end proc
-
-ops(verord)=ops(if n>1 then (for i:=1 to n-1 do (if (a[i] > a[i+1]) fi) od) fi)
-ops(verord)=ops(if n>1 then (for i:=1 to n-1) fi)
-ops(verord)=ops(if n>1 then (Σ 1 to n-1) fi)
-ops(verord)=ops(Σ 1 to n-1)
-ops(verord)=n-1 (aprox)
+ops(det_ord)=ops(if n>1 then (for i:=1 to n-1 do (if (a[i] > a[i+1]) fi) od) fi)
+ops(det_ord)=ops(if n>1 then (for i:=1 to n-1) fi)
+ops(det_ord)=ops(if n>1 then (Σ 1 to n-1) fi)
+ops(det_ord)=ops(Σ 1 to n-1)
+ops(det_ord)=n-1 (aprox)
 
 Notar que los dos if no los cuento porque no sirven, ya que estas comparaciones dependen directamente del n, por ende el resultado no es del todo exacto pero si de ese orden
 ```
