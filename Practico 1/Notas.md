@@ -1,3 +1,23 @@
+## Algortimos, ¿Que hacen?¿Como lo hacen?
+***Algortimo***: es como una receta, **serie de pasos para resolver un problema**. No tiene relacion con el codigo.
+### ¿Que hace?
+Al hablar de que hace un algortimo nos referimos unicamente a **que hace y nada mas, sin decir nada del codigo ni de su implementacion**. Por ejemplo los algoritmos de ordenacion podriamos decir que:  
+	*Reciben un arreglo de elementos y devuelven una permutacion del original ordenada de menor a mayor.*
+### ¿Como lo hace?
+Nuevamente **no hay que decir nada del codigo**, simplemente **decir su implementacion en lenguaje que todas las personas puedan entender**. Por ejemplo para el algoritmo de ordenacion por seleccion podrias decir que:
+	*Selecciona el menor elemento del arreglo y lo compara con que esta ubicado primero y lo ubica segun corresponda, luego repite esto con el segundo mas pequeño y asi hasta terminar.*
+## Procedimientos y funciones
+### Procedimientos
+Es algo que podemos utilizar para hacer varias cosas, incluso no serian necesarias las funciones pero existen para mayor simpleza.  
+Estas se caracterizan por **no devolver nada**, o sea **no tener ret**. También **es necesario que aclarar de tipo son los argumentos que recibe**.
+#### Ejemplo
+<pre><code><b>proc</b> p (<b>in</b> a: <b>int</b>, <b>out</b> b: <b>int</b>)
+</code></pre>
+### Funciones
+Existen por mayor simpleza. Estas se caracterizan por **siempre tener devolver algo, o sea tienen siempre un ret**. Ademas **no es necesario indicar de tipo son los argumentos que recibe pero** hay que notar que **estos no los puede modificar** (o sea no los puede usar como out)
+#### Ejemplo
+<pre><code><b>fun</b> f(a:<b>int</b>) <b>ret</b> b: <b>int</b>
+</code></pre>
 ## In/Out
 Que algo sea in significa que es una variable que vamos a usar como entrada, o sea que estara posicionada del lado derecho de una asignacion porque la usaremos para darle valor a otras variables. 
 

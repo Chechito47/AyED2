@@ -311,15 +311,17 @@ c)
 
 
 ![ScreenShot](Imagenes%20practico%201.1/ej8.png)
+<pre><code>
+t := 1
+<b>do</b> t &lt; n
+	t := t * 2
+<b>od</b>
+</code></pre>
 
-```java
+```pascal
 a)
-t:=1
-do t < n
-	t:= t * 2
-od
-
-Valor n     Resultado
+Notemos que de base tenemos una asignacion a t
+Valor n Resultado
 n=0  -> asig=1
 n=1  -> asig=1
 n=2  -> asig=2
@@ -333,14 +335,19 @@ n=9  -> asig=5
 n=10 -> asig=5
 
 Es similar al log2(x)
+```
 
+<pre><code>
+t := n
+<b>do</b> t &gt; 0
+	t := t div 2
+<b>od</b>
+</code></pre>
 
+```pascal
 b)
-t:=n
-do t > 0
-	t:= t div 2
-od
-
+Notar que nuevamente tengo una asignacion a t para todos los casos de base
+Paro cuando 1 < t < 0
 n=0  -> asig=1
 n=1  -> asig=2
 n=2  -> asig=3
@@ -354,16 +361,42 @@ n=9  -> asig=5
 n=10 -> asig=5
 
 Otra vez similar a log2(x)
+```
 
+<pre><code>
+<b>for</b> i := 1 <b>to</b> n <b>do</b>
+	t := i
+	<b>do</b> t &gt; 0
+		t := t div 2
+	<b>od</b>
+<b>od</b>
+</code></pre>
 
+```pascal
 c)
-for i:=1 to n do
-	t:=i
-	do t > 0
-		t:= t div 2
-	od
-od
+n=2
+1<=2 si => t=1; 1>0 si => t=1/2=0.5
+2<=2 si => t=2; 2>0 si => t=2div2=1
+				1>0 si => t=1/2=0.5
+3<=2 no termino => 5 asignaciones a t
 
+n=3
+1<=3 si => t=1; 1>0 si => t=1/2=0.5
+2<=3 si => t=2; 2>0 si => t=2/2=1
+				1>0 si => t=1/2=0.5
+3<=3 si => t=3; 3>0 si => t=3/2=1.5
+				1.5>0 si => t=1.5/2=0.75
+4<=3 no termino => 8
+
+N=4
+IDEM que anterior hasta:
+4<=4 si => t=4; 4>0 si => t=4/2=2
+				2>0 si => t=4/2=1
+				1>0 si => t=1/2=0.5
+5<=4 no termino => 8 + 4 = 12 asignaciones
+
+
+No tengo asignacion base
 n=0  -> asig=0
 n=1  -> asig=2
 n=2  -> asig=5
@@ -378,16 +411,46 @@ n=10 -> asig=35
 
 Por cada potencia de 2 incremento la cantidad de aignaciones en 1, arrancando en 2.
 Entonces:
-ops = (2*n)+(2*n-1)+- Cantidad de potencias de 2 que se pasaron con el n actual arrancando con -2
+ops = (2*n)+(2*tn-1)+- Cantidad de potencias de 2 que se pasaron con el n actual arrancando con -2
+```
 
+<pre><code><b>for</b> i := 1 <b>to</b> n <b>do</b>
+	t := i
+	<b>do</b> t &gt; 0
+		t := t - 2
+	<b>od</b>
+<b>od</b>
+</code></pre>
 
+```pascal
 d)
-for i:=1 to n do
-	t:=i
-	do t > 0
-		t:= t - 2
-	od
-od
+n=1
+1<=1 si => t=1; 1>0 si => t=1-2=-1
+2<=1 no termino => 2 asignaciones
+
+n=2
+IDEM que n=1 con:
+2<=2 si => t=2; 2>0 si => t=2-2=0
+3<=3 no termino => 4 asignaciones
+
+n=3
+IDEM que n=2 con:
+3<=3 si => t=3; 3>0 si => t=3-2=1
+				1>0 si => t=1-2=-1
+4<=3 no termino => 4 + 3= 7 asignaciones
+
+n=4
+IDEM que n=3 con:
+4<=4 si => t=4; 4>0 si => t=4-2=2
+				2>0 si => t=2-2=0
+5<=4 no termino => 7 + 3= 10 asignaciones
+
+n=5
+IDEM que n=4 con:
+5<=5 si => t=5; 5>0 si => t=5-2=3
+				3>0 si => t=3-2=1
+				1>0 si =>t=1-2=-1
+6<=6 no termino => 10 + 4= 14 asignaciones
 
 n=0  -> asig=0
 n=1  -> asig=2
