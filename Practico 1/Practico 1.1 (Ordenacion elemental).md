@@ -158,17 +158,20 @@ c)
 ![ScreenShot](Imagenes%20practico%201.1/ej5.png)
 
 ![ScreenShot](Imagenes%20practico%201.1/ecuaciones.png)
+
+<pre><code>
+t := 0
+<b>for</b> i := 1 <b>to</b> n <b>do</b>
+	<b>for</b> j := 1 <b>to</b> n² <b>do</b>
+		<b>for</b> k := 1 <b>to</b> n³ <b>do</b>
+			t := t + 1
+		<b>od</b>
+	<b>od</b>
+<b>od</b>
+</code></pre>
+
 ```java
 a)
-t:=0
-for i:=1 to n do
-	for j:=1 to n² do
-		for k:=1 to n³ do
-			t:= t + 1
-		od
-	od
-od
-
 A simple vista podemos notar que el algoritmo hace n⁶ asignaciones:
 ops(A) = ops(t:=0) + ops(for i:=1 to n do (for j:=1 to n² do (for 
 		 k:=1 to n³ do t:=t+1 od) od) od)
@@ -184,19 +187,21 @@ ops(A) = 1 + n*n²*n³
 ops(A) = 1 + n⁶
 
 Donde el + 1 es despreciable
+```
 
+<pre><code>
+t := 0
+<b>for</b> i := 1 <b>to</b> n <b>do</b>
+	<b>for</b> j := 1 <b>to</b> i <b>do</b>
+		<b>for</b> k := j <b>to</b> j + 3 <b>do</b>
+			t := t + 1
+		<b>od</b>
+	<b>od</b>
+<b>od</b>
+</code></pre>
 
-
+```java
 b)
-t:=0
-for i:=1 to n do
-	for j:=1 to i do
-		for k:=j to j+3 do
-			t:= t + 1
-		od
-	od
-od
-
 ops(B) = ops(t:=0) + ops(for i:=1 to n do (for j:=1 to i do (for k:=j to j+3
 		 do t:=t+1)))
 ops(B) = 1 + ops(for i:=1 to n do (for j:=1 to i do (for k:=j to j+3 do t:=t+1)))
