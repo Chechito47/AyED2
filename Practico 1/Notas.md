@@ -24,4 +24,6 @@ Selecciono el **menor numero entre 1 y n** y lo comparo con el primero y ordeno,
 Es la forma en que ordenariamos las cartas en la mano.  
 Comenzamos desde el segundo elemento, a este lo comparamos con el primero y lo ordenamos segun quien sea mas grande. Luego tomamos el tercer elemento y lo comparamos con los dos primeros (que ya estan ordenados) y lo ubicamos segun corresponda. Y asi hasta terminar con todos los elementos.  
 *Ejemplo:* [5, 2, 9, 1, 5, 6]  
-a
+Tomo el segundo elemento y lo comparo con el primero
+[5, **2**, 9, 1, 5, 6]
+[2, 5, 9 ,1, 5, 6]
