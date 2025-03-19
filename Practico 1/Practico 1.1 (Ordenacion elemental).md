@@ -113,7 +113,7 @@ Comparando dos elementos entre si, arrancando desde el primero y comparandolo co
 
 ![ScreenShot](Imagenes%20practico%201.1/ej4.png)
 
-```java
+```pascal
 Recordemos que el de seleccion toma el menor elemento entre 1 y n y lo compara con el primero y si es mas pequeño lo pone primero, sino segundo
 
 a)
@@ -170,7 +170,7 @@ t := 0
 <b>od</b>
 </code></pre>
 
-```java
+```pascal
 a)
 A simple vista podemos notar que el algoritmo hace n⁶ asignaciones:
 ops(A) = ops(t:=0) + ops(for i:=1 to n do (for j:=1 to n² do (for 
@@ -200,7 +200,7 @@ t := 0
 <b>od</b>
 </code></pre>
 
-```java
+```pascal
 b)
 ops(B) = ops(t:=0) + ops(for i:=1 to n do (for j:=1 to i do (for k:=j to j+3
 		 do t:=t+1)))
@@ -220,22 +220,25 @@ ops(B) = 1 + 2n²(n+1)
 
 ![ScreenShot](Imagenes%20practico%201.1/ej6.png)
 
-```pascal
-proc p (in/out a: array[1..n] of T)
-	var x: nat
-	for i:=n downto 2 do
-		x:= f(a,i)
+<pre><code>
+<b>proc</b> p (<b>in/out</b> a:<b>array</b>[1..n] <b>of T</b>)
+	<b>var</b> x: <b>nat</b>
+	<b>for</b> i := n <b>downto</b> 2 <b>do</b>
+		x := f(a, i)
 		swap(a, i, x)
-	od
-end proc
+	<b>od</b>
+<b>end proc</b>
 
-fun f (a: array[1..n] of T, i: nat) ret x: nat
-	x:= 1
-	for j:=2 to i do
-		if a[j] > a[x] then x:=j fi
-	od
-end fun
 
+<b>fun</b> f(a:<b>array</b>[1..n] <b>of T</b>, i: <b>nat</b>) <b>ret</b> x: <b>nat</b>
+	x := 1
+	<b>for</b> j := 2 <b>to</b> i <b>do</b>
+		<b>if</b> a[j] &gt; a[x] <b>then</b> x := j <b>fi</b>
+	<b>od</b>
+<b>end fun</b>
+</code></pre>
+
+```pascal
 ¿Que hacen?
 A simple vista parece el algoritmo de ordenacion por seleccion (selection sort) el cual ordena los elementos de un arreglo de mayor a menor
 
@@ -243,23 +246,25 @@ A simple vista parece el algoritmo de ordenacion por seleccion (selection sort) 
 Toma los elementos de a dos comenzando desde el final del arreglo, llama a la funcion "f" la cual los compara y si el que esta a la derecha es mayor que el de la izquierda guarda en x el valor del que estaba en la derecha para luego con la funcion swap intercambiarlos de lugar. Hace eso hasta que queden dos elementos.
 
 Cambio de nombres:
-proc selection_sort_biggest (in/out a: array[1..n] of T)
-	var max: nat
-	for i:=n downto 2 do
-		max:= find_max(a,i)
-		swap(a, i, x)
-	od
-end proc
-
-fun find_max (a: array[1..n] of T, i: nat) ret max: nat
-	max:= 1
-	for j:=2 to i do
-		if a[j] > a[max] then max:=j fi
-	od
-end fun
 ```
 
+<pre><code>
+<b>proc</b> selection_sort_biggest (<b>in/out</b> a:<b>array</b>[1..n] <b>of T</b>)
+	<b>var</b> max: <b>nat</b>
+	<b>for</b> i := n <b>downto</b> 2 <b>do</b>
+		max := find_max(a, i)
+		swap(a, i, x)
+	<b>od</b>
+<b>end proc</b>
 
+
+<b>fun</b> find_max(a:<b>array</b>[1..n] <b>of T</b>, i: <b>nat</b>) <b>ret</b> max: <b>nat</b>
+	x := 1
+	<b>for</b> j := 2 <b>to</b> i <b>do</b>
+		<b>if</b> a[j] &gt; a[max] <b>then</b> max := j <b>fi</b>
+	<b>od</b>
+<b>end fun</b>
+</code></pre>
 
 ![ScreenShot](Imagenes%20practico%201.1/ej7.png)
 
