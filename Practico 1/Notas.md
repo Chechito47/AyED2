@@ -17,13 +17,52 @@ x = j
 j = y
 ```
 
-## Algoritmo de seleccion (selection sort)
-Selecciono el **menor numero entre 1 y n** y lo comparo con el primero y ordeno, luego con el segundo mas pequeño, luego con el tercero mas pequeño y asi...
+## ***SELECTION SORT*** (Ordenacion por seleccion)
+Funciona creando una lista ordenada usando los elementos de la lista no ordenada.  
+Selecciono el **numero mas pequeño de la lista** no ordenada (*entre 1 y n*) y lo coloco en la **primera posicion** de la lista ordenada. Luego **busco el menor elemento en la lista no ordenada y lo coloco primero en la sublista de los no ordenados ampliando asi la lista de los ordenados y redujendo la de los no ordenados.** Repito esto hasta que no queden elementos. (*basicamente tomo el menor de todos, lo pongo primero y luego tomo el menor de los restantes y lo pongo segundo, luego el menor y lo pongo tercero y asi...*)
+### Ejemplo
+[6, 4, 2, 3, 1]  
+Busco el menor de la lista y lo coloco primero (1)  
+[6, 4, 2, 3, **1**]  
+[1, 6, 4, 2, 3]  
+Considerando la sublista no ordenada [6, 4, 2, 3] busco el menor (2) y lo coloco primero  
+[1, 6, 4, **2**, 3]  
+[1, 2, 6, 4, 3]  
+Considerando la sublista no ordenada [6, 4, 3] busco el menor (3) y lo coloco primero  
+[1, 2, 6, 4, **3**]  
+[1, 2, 3, 6, 4]  
+Considerando la sublista no ordenada [6, 4] busco el menor (4) y lo coloco primero  
+[1, 2, 3, 6, **4**]  
+[1, 2, 3, 4, 6] **LISTA YA ORDENADA**
 
-## Algortitmo de ordenacion por incercion ()
+### Complejidad
+**Mejor caso**: O(n²) => El algoritmo siempre realiza la misma cantidad de comparaciones (no intercambios)  
+**Peor caso**: O(n²) => La lista esta en orden inverso  
+Realiza pocos intercambios pero al tener un gran numero de comparaciones hace que no sea eficiente.
+
+## ***INSERTION SORT*** (Ordenacion por insercion)
 Es la forma en que ordenariamos las cartas en la mano.  
-Comenzamos desde el segundo elemento, a este lo comparamos con el primero y lo ordenamos segun quien sea mas grande. Luego tomamos el tercer elemento y lo comparamos con los dos primeros (que ya estan ordenados) y lo ubicamos segun corresponda. Y asi hasta terminar con todos los elementos.  
-*Ejemplo:* [5, 2, 9, 1, 5, 6]  
-Tomo el segundo elemento y lo comparo con el primero
-[5, **2**, 9, 1, 5, 6]
-[2, 5, 9 ,1, 5, 6]
+Comenzamos desde el **segundo elemento**, a este lo **comparamos con el primero** y lo **ordenamos** segun quien sea mas grande. Luego tomamos el tercer elemento y lo comparamos con los dos primeros (que ya estan ordenados) y lo ubicamos segun corresponda. Y asi hasta terminar con todos los elementos.  
+### Ejemplo
+[5, 2, 9, 1, 5, 6]  
+Tomo el segundo elemento (2) y lo comparo con el primero (5)  
+[5, **2**, 9, 1, 5, 6]  
+[2, 5, 9 ,1, 5, 6]  
+Tomo el siguiente (9) y lo comparo con los anteriores  
+[2, 5, **9**, 1, 5, 6]  
+[2, 5, 9, 1, 5, 6]  
+Tomo el siguiente (1) y lo comparo con los anteriores  
+[2, 5, 9, **1**, 5, 6]  
+[1, 2, 5, 9, 5, 6]  
+Tomo el siguiente (5) y comparo con los anteriores  
+[1, 2, 5, 9, **5**, 6]  
+[1, 2, 5, 5, 9, 6]  
+Tomo el siguiente (6) y comparo con los anteriores  
+[1, 2, 5, 5, 9, **6**]  
+[1, 2, 5, 5, 6, 9]  **LISTA YA ORDENADA**
+
+### Complejidad
+**Mejor caso**: O(n) => Se da cuando la lista ya esta ordenada  
+**Peor caso**: O(n²) => Se da cuando la lista esta totalmente al revez (ordenada de mayor a menor)  
+Es eficiente para listas pequeñas o parcialmente ordenadas pero no es adecuado para listas largas.
+
