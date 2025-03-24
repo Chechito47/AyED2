@@ -2,6 +2,26 @@
 
 ![ScreenShot](Imagenes%20practico%201.1/ej4.png)
 
+<pre><code><span style="color:yellow;">a.1) [7, 1, 10, 3, 4, 9, 5]</span>
+<i>Como tiene 7 elementos => grupo de 4 y otro de 3. Trabajo con el primer grupo</i> 
+[<mark>7, 1, 10, 3</mark>, <mark>4, 9, 5</mark>]
+<i>Vuelvo a dividir porque no esta ordenado</i>
+[<mark>7, 1</mark>, <mark>10, 3</mark>, <mark>4, 9, 5</mark>]
+<i>Divido de nuevo</i>
+[<mark>7</mark>, <mark>1</mark>, <mark>10</mark>, <mark>3</mark>, <mark>4, 9, 5</mark>]
+<i>Intercalo entre divisiones</i>
+[<mark>1, 7</mark>, <mark>3, 10</mark>, <mark>4, 9, 5</mark>]
+[<mark>1, 3, 7, 10</mark>, <mark>4, 9, 5</mark>]
+<i>Sigo con la parte derecha</i>
+[<mark>1, 3, 7, 10</mark>, <mark>4, 9</mark>, <mark>5</mark>]
+[<mark>1, 3, 7, 10</mark>, <mark>4</mark>, <mark>9</mark>, <mark>5</mark>]
+[<mark>1, 3, 7, 10</mark>, <mark>4, 9</mark>, <mark>5</mark>]
+[<mark>1, 3, 7, 10</mark>, <mark>4, 5, 9</mark>]
+<i>Intercalo finalmente</i>
+[<mark>1, 3, 4, 5, 7, 9</mark>]
+</code></pre>
+
+
 ```pascal
 a.1) [7, 1, 10, 3, 4, 9, 5]
 
