@@ -86,3 +86,29 @@ Tomo el siguiente (6) y comparo con los anteriores
 **Peor caso**: O(n²) => Se da cuando la lista esta totalmente al revez (ordenada de mayor a menor)  
 Es eficiente para listas pequeñas o parcialmente ordenadas pero no es adecuado para listas largas.
 
+### ***MERGE SORT*** (Ordenacion por intercalacion)
+Es del tipo **divide y venceras**.  
+**Divide los elementos en listas mas pequeñas** y las **ordena recursivamente** antes de **intercalarlas** entre si. *Divide el conjunto de elementos en dos mitades, esas mitades se ordenan recursivamente (o sea se dividen en mas mitades) y finalmente se intercalan las mitades ya ordenadas hasta formar un solo conjunto de elementos ordenado*.
+### Ejemplo
+[38, 27, 43, 3, 9, 82, 10]  
+Divido en dos mitades  
+[38, 27, 43, 3] y [9, 82, 10]  
+Comienzo con la parte izquierda, divido recursivamente en mitades mas pequeñas  
+[38, 27], [43, 3] y [9, 82, 10]  
+[38], [27], [43], [3] y [9, 82, 10]  
+Intercalo los elementos (de la forma en que los dividi)  
+[27, 38], [3, 43] y [9, 82, 10]  
+[3, 27, 38, 43] y [9, 82, 10]  
+Divido recursivamente la parte derecha  
+[3, 27, 38, 43], [9, 82] y [10]  
+[3, 27, 38, 43], [9], [82] y [10]  
+Intercalo los elementos de la parte derecha  
+[3, 27, 38, 43], [9, 82] y [10]  
+[3, 27, 38, 43], [9, 10, 82]  
+Intercalo los elementos de ambas partes  
+[3, 9, 10, 27, 38, 43, 82]  
+### Complejidad
+**Mejor caso**: O(log (n)) => Cuando la lista esta ordenada o casi ordenada  
+**Peor caso**: O(log(n))   => Cuando la lista esta totalmente desordenada  
+**Siempre realiza la misma cantidad de divisiones de lista e intercalaciones** sin importar el orden de la misma, por lo que **tiene complejidad especial** (si la lista crece el tiempo que tarda no crece mucho) por lo que es **optimo para listas grandes**. Pero hay que resaltar que necesita espacio para almacenar las listas divididas por lo que no es el optimo en cuanto a memoria.
+
