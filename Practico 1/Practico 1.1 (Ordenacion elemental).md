@@ -465,7 +465,9 @@ n=9  -> asig=34
 n=10 -> asig=40
 
 Arranco sumando de a 2, luego por cada impar la cantidad de ops aumenta en 1
-ops(nat)= nose
+ops(nat)= res(n)= 2n + x
+		  donde x=0 y aumenta en 1 cada vez que n se hace impar
+		  x se empieza a sumar desde n=3
 ```
 
 
@@ -486,8 +488,8 @@ ops(nat)= nose
 </code></pre>
 
 ```pascal
-ops(det_ord)=ops(if n>1 then (for i:=1 to n-1 do (if (a[i] > a[i+1]) fi) od) fi)
-ops(det_ord)=ops(if n>1 then (for i:=1 to n-1) fi)
+ops(det_ord)=ops(if n>1 then (for i:=1 to N-1 do (if (a[i] > a[i+1]) fi) od) fi)
+ops(det_ord)=ops(if n>1 then (for i:=1 to N-1) fi)
 ops(det_ord)=ops(if n>1 then (Σ 1 to n-1) fi)
 ops(det_ord)=ops(Σ 1 to n-1)
 ops(det_ord)=n-1 (aprox)
@@ -498,22 +500,23 @@ Notar que los dos if no los cuento porque no sirven, ya que estas comparaciones 
 
 ![ScreenShot](Imagenes%20practico%201.1/ej10.png)
 
+<pre><code>
+<b>proc</b> q(<b>in/out</b> a:<b>array</b>[1..n] <b>of T</b>)
+	<b>for</b> i := n-1 <b>downto</b> 1 <b>do</b>
+		r(a, i)
+	<b>od</b>
+<b>end proc</b>
+
+
+<b>proc</b> r(<b>in/out</b> a:<b>array</b>[1..n] <b>of T</b>, <b>in</b> i: <b>nat</b>)
+	<b>var</b> j: <b>nat</b>
+	j := i
+	<b>do</b> j &lt; n ^ a[j] &gt; a[j+1] -> swap(a, j+1, j)
+								    j := j + 1
+	<b>od</b>
+<b>end proc</b></code></pre>
+
 ```pascal
-proc q (in/out a: array[1..n] of T)
-	for i:=n-1 downto 1 do
-		r(a,i)
-	od
-end proc
-
-proc r (in/out a: array[1..n] of T, in i: nat)
-	var j: nat
-	j:=i
-	do j<n ^ a[j]>a[j+1] -> swap(a, j+1, j)
-							j:=j+1
-	od
-end proc
-
-
 ¿Que hacen?
 Ordena los elementos de un arreglo de menor a mayor. Es una especie de insertion sort
 
@@ -525,17 +528,20 @@ Ejemplo:
 4, 5, 7
 
 Cambio de nombres:
-proc insertion_sort_downto (in/out a: array[1..n] of T)
-	for i:=n-1 downto 1 do
-		r(a,i)
-	od
-end proc
-
-proc insert_up (in/out a: array[1..n] of T, in i: nat)
-	var j: nat
-	j:=i
-	do j<n ^ a[j]>a[j+1] -> swap(a, j+1, j)
-							j:=j+1
-	od
-end proc
 ```
+
+<pre><code>
+<b>proc</b> insertion_sort_downto(<b>in/out</b> a:<b>array</b>[1..n] <b>of T</b>)
+	<b>for</b> i := n-1 <b>downto</b> 1 <b>do</b>
+		insert_downto(a, i)
+	<b>od</b>
+<b>end proc</b>
+
+
+<b>proc</b> insert_downto(<b>in/out</b> a:<b>array</b>[1..n] <b>of T</b>, <b>in</b> i: <b>nat</b>)
+	<b>var</b> j: <b>nat</b>
+	j := i
+	<b>do</b> j &lt; n ^ a[j] &gt; a[j+1] -> swap(a, j+1, j)
+								    j := j + 1
+	<b>od</b>
+<b>end proc</b></code></pre>
