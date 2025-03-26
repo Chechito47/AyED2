@@ -86,7 +86,7 @@ Tomo el siguiente (6) y comparo con los anteriores
 **Peor caso**: O(n²) => Se da cuando la lista esta totalmente al revez (ordenada de mayor a menor)  
 Es eficiente para listas pequeñas o parcialmente ordenadas pero no es adecuado para listas largas.
 
-### ***MERGE SORT*** (Ordenacion por intercalacion)
+## ***MERGE SORT*** (Ordenacion por intercalacion)
 Es del tipo **divide y venceras**.  
 **Divide los elementos en listas mas pequeñas** y las **ordena recursivamente** antes de **intercalarlas** entre si. *Divide el conjunto de elementos en dos mitades, esas mitades se ordenan recursivamente (o sea se dividen en mas mitades) y finalmente se intercalan las mitades ya ordenadas hasta formar un solo conjunto de elementos ordenado*.
 ### Ejemplo
@@ -112,3 +112,42 @@ Intercalo los elementos de ambas partes
 **Peor caso**: O(log(n))   => Cuando la lista esta totalmente desordenada  
 **Siempre realiza la misma cantidad de divisiones de lista e intercalaciones** sin importar el orden de la misma, por lo que **tiene complejidad especial** (si la lista crece el tiempo que tarda no crece mucho) por lo que es **optimo para listas grandes**. Pero hay que resaltar que necesita espacio para almacenar las listas divididas por lo que no es el optimo en cuanto a memoria.
 
+## ***QUICK SORT*** (Ordenacion rapida)
+Es otro del tipo divide y venceras.  
+Lo primero que hace es **elegir un pivot** el cual puede ser el primer, ultimo o un elemento aleatorio de la lista. Luego **reorganiza la lista** para que todos los elementos **menores que el pivot queden a la izquierda** y todos **los mayores iguales a la derecha** (lo hace con la funcion ***partition***) **repitiendo esto de manera recursiva** hasta tener listas de 1 solo elemento las cuales son triviales.
+
+### Ejemplo
+[3, 9, 2, 1, 7, 3, 5]  
+Elijo al primer elemento (3) como pivot  
+[*3*, 9, 2, 1, 7, 3, 5]  
+Divido la lista segun quienes son mas pequeños y mas grandes que el pivot  
+[*3*, 2, 1] y [9, 7, 3, 5]  
+Ordeno el lado izquierdo realizando permutaciones  
+[2, 1, 3] y [9, 7, 3, 5]  
+El 3 ya esta ordenado, elijo (2) como mi nuevo pivot  
+[*2*, 1, 3] y [9, 7, 3, 5]  
+Otra vez ordeno realizando permutaciones  
+[1, 2, 3] y [9, 7, 3, 5]  
+Elijo (1) como el nuevo pivot  
+[*1*, 2, 3] y [9, 7, 3, 5]  
+Como es lista de un solo elemento es trivial  
+[1, 2, 3] y [9, 7, 3, 5]  
+Comienzo con el lado derecho, elijo (9) como mi pivot  
+[1, 2, 3] y [*9*, 7, 3, 5]  
+Ubico el pivot realizando permutaciones  
+[1, 2, 3] y [5, 7, 3, 9]  
+Ahora como el pivot esta ubicado elijo uno nuevo (5)  
+[1, 2, 3] y [*5*, 7, 3, 9]  
+Ubico el pivot con permutaciones  
+[1, 2, 3] y [3, 5, 7, 9]  
+Ahora elijo (3) como pivot pero al ser lista de un solo elemento es trivial  
+[1, 2, 3] y [3, 5, 7, 9]  
+IDEM con pivot (7)  
+[1, 2, 3] y [3, 5, 7, 9]  **LISTA YA ORDENADA**  
+
+### Funcion partition
+Es la **encargada de acomodar a los elementos menores del pivot** en la parte izquierda **y los mayores iguales** en la derecha para luego **colocar al pivot en la posicion que le corresponde**.  
+Va mirando al elemento mas a la izquierda (sin contar al pivot) y al de mas a la derecha, mientras encuentre elementos que esten bien ubicados (o sea si de la izquierda se encuentra un elemento menor que el pivot) avanza sin hacer nada, si no no avanza del lado que hay un elemento mal ubicado y si lo hace del otro hasta encontrar un elemento mal ubicado y hace una paermutacion.
+### Ejemplo (siguiendo con el anterior)
+Veamos que hizo la funcion partition en el ejemplo anterior:  
+[3, 9, 2, 1, 7, 3, 5]

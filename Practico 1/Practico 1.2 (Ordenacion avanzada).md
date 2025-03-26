@@ -139,4 +139,3 @@ merge_sort_rec(a, 7, 7)
 ```
 
 ![ScreenShot](Imagenes%20practico%201.2/ej2.png)
-
