@@ -139,3 +139,40 @@ merge_sort_rec(a, 7, 7)
 ```
 
 ![ScreenShot](Imagenes%20practico%201.2/ej2.png)
+
+```pascal
+Recibe un array[1..2^n] y un natural.
+Intercala el segmento a[1, 2^i] con a[2^i+1, 2*2^i]
+Intercala el segmento a[2*2^i+1, 3*2^i] con a[3*2^i+1, 4*2^i]
+etc...
+
+Asumimos que cada uno de esos segmento esta ordenado.
+
+Ejemplo: llamos al procedimiento con i=1.
+array=[3, 7, 1, 6, 1, 5, 3, 4]
+	   1  2  3  4  5  6  7  8
+Hagamos la secuencia paso por paso
+Intercalo a[1, 2] con a[3, 4] (o sea ordeno)
+[1, 3, 6, 7, 1, 5, 3, 4]
+Ahora intercalo a[5, 6] con a[7, 8]
+[1, 3, 6, 7, 1, 3, 4, 5]
+
+Ahora llamemos al procedimiento de nuevo pero con i=2
+array=[1, 3, 6, 7, 1, 3, 4, 5]
+Intercalo a[1, 4] con [5, 8] (O sea intercalo todo, xq el a[1, 4] es SEGMENTO, incluye a a[2] y a[3])
+[1, 1, 3, 3, 4, 5, 6, 7]
+Intercalo a[9, 12] con a[13, 16]
+No puedo, mi arreglo no tan grande. Termino
+
+Y ya tengo el arreglo ordenado. 
+Ahora hagamos la implementacion
+```
+
+<pre><code>
+<b>proc</b> intercalar_cada(<b>in/out</b> a:<b>array[1..2^n] of T</b>, <b>in</b> i:<b>nat</b>)
+	<b>var</b> lft, rgt, size: <b>nat</b>
+	lft := 1
+	rgt := 2^i
+	size := 2^n
+	<b>while</b> rgt &lt;= size <b>do</b>
+		merge(a, lft, )
