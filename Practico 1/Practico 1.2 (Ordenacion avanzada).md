@@ -210,4 +210,15 @@ lft=1, rgt=2, size=8, mid=1
 Ahora termine dentro del ciclo, salgo
 lft=1, rgt=rgt=8, mid=4
 merge(a, 1, 4, 8) => [1, 1, 3, 3, 4, 5, 6, 7] y LISTO
+
+
+b)
 ```
+
+<pre><code>
+<b>proc</b> merge_sort_cada (<b>in/out</b>a: <b>array</b>[1..N] of <b>T</b>, <b>in</b> lft, rgt: <b>nat</b>)
+<b>var</b> i: <b>nat</b>
+<b>if</b> rgt &gt; lft <b>then</b>
+	intercalar_cada(a, i)
+<b>fi</b>
+<b>end proc</b></code></proc>
