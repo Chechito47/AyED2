@@ -173,6 +173,41 @@ Ahora hagamos la implementacion
 	<b>var</b> lft, rgt, size: <b>nat</b>
 	lft := 1
 	rgt := 2^i
-	size := 2^n
+	size := n
+	mid := (lft + rgt) / 2
 	<b>while</b> rgt &lt;= size <b>do</b>
-		merge(a, lft, )
+		merge(a, lft, mid, rgt)
+		lft = rgt + 1
+		rgt = rgt + 2^i
+		mid = (lft + rgt) / 2
+	<b>od</b>
+	lft := 1
+	mid := (lft + rgt) / 2
+	merge(a, lft, mid, rgt)
+<b>end proc</b></code></pre>
+
+```pascal
+Notemos que lft y rgt estan entre [1, 2^i] y luego entre [2^i+1, 2*2^i].
+Luego entre [2*2^i+1, 3*2^i] y luego entre [3*2^i+1, 4*2^i]
+
+Por ejemplo, llamemos al procedimiento con i=1
+array=[3, 7, 1, 6, 1, 5, 3, 4]
+lft=1, rgt=2, size=8, mid=1
+2 <= size si => merge (a, 1, 1, 2) => [3, 7][1, 6, 1, 5, 3, 4]
+			   lft=3
+			   rgt=4
+			   mid=3
+4 <= size si => merge (a, 3, 3, 4) => [3, 7][1, 6][1, 5, 3, 4]
+			   lft=5
+			   rgt = 6
+			   mid=5
+6 <= size si => merge (a, 5, 5, 6) => [3, 7][1, 6][1, 5][3, 4]
+			   lft=7
+			   rgt=8
+			   mid=7
+8 <= size si => merge(a, 7, 7, 8) => [3, 7][1, 6][1, 5][3, 4]
+
+Ahora termine dentro del ciclo, salgo
+lft=1, rgt=rgt=8, mid=4
+merge(a, 1, 4, 8) => [1, 1, 3, 3, 4, 5, 6, 7] y LISTO
+```
