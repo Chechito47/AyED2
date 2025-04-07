@@ -13,3 +13,9 @@ graph TD;
 
 
 > :warning: **Warning:** Do not push the big red button.
+
+
+<pre><code>
+<span style="color:red;">a.1) [7, 1, 10, 3, 4, 9, 5]</span>
+[<span style="background-color:blue;">7</span>, 1, 10, 3, 4, 9, 5]
+</code></pre>

@@ -218,7 +218,160 @@ b)
 <pre><code>
 <b>proc</b> merge_sort_cada (<b>in/out</b>a: <b>array</b>[1..N] of <b>T</b>, <b>in</b> lft, rgt: <b>nat</b>)
 <b>var</b> i: <b>nat</b>
-<b>if</b> rgt &gt; lft <b>then</b>
+i := 0
+<b>do</b> rgt &gt; lft && i &lt;= n<b>then</b>
 	intercalar_cada(a, i)
+	i := i +1
 <b>fi</b>
 <b>end proc</b></code></proc>
+
+![ScreenShot](Imagenes%20practico%201.2/ej3.png)
+![ScreenShot](Imagenes%20practico%201.1/ej4.png)
+
+```pascal
+a.1) [7, 1, 10, 3, 4, 9, 5]
+Ordenemos haciendo los llamados a la funcion quick_sort_rec
+
+proc quick_sort(in/out a: array[1..n] of T)
+	quick_sort_rec(a, 1, n)
+end proc
+
+proc quick_sort_rec(in/out a: array[1..n] of T, in lft, rgt: nat)
+	var ppiv: nat
+	if rgt > lft then
+		partition (a, lft, rgt, ppiv)
+		quick_sort_rec(a, lft, ppiv-1)
+		quick_sort_rec(a, ppiv+1, rgt)
+	fi
+end proc
+
+proc partition (in/out a: array[1..n] of T, in lft, rgt: nat, out ppiv: nat)
+	var i, j: nat
+	ppiv := lft
+	i := lft + 1
+	j := rgt
+	do i <= j
+		if a[i] <= a[ppiv] then i++
+		   a[j] >= a[ppiv] then j--
+		   a[i] > a[ppiv] ^ a[j] < a[ppiv] then swap(a, i, j)
+		fi
+	od
+	swap(a, ppiv, j)
+	ppiv := j
+end proc
+
+[7, 1, 10, 3, 4, 9, 5]
+EJECUTEMOS LINEA POR LINEA
+lft=1, rgt=7
+quick_sort_rec(a, 1, 7)
+	if (1 < 7) true =>
+		partition(a, 1, 7, ppiv)
+			ppiv=1, i=2, j=7
+			do 2 <= 7 si
+				if a[2] <= a[1] true i++
+			do 3 <= 7 si
+				if a[3] <= a[1] false
+				if a[7] >= a[1] false
+				swap(a, 3, 7)
+				[7, 1, 5, 3, 4, 9, 10]
+			do 3 <= 7 si
+				if a[3] <= a[1] true i++
+			do 4 <= 7 si
+				if a[4] <= a[1] true i++
+			do 5 <=7 si
+				if a[5] <= a[1] true i++
+			do 6 <= 7 si
+				if a[6] <= a[1] false
+				if a[7] >= a[1] true j--
+			do 6 <= 6 si
+				if a[6] <= a[1] false
+				if a[6] >= a[1] true j--
+			do 6 <= 5 no Termino ciclo
+			swap(a, 1, 5)
+			[4, 1, 5, 3, 7, 9, 10] DONDE EL 7 YA ESTA EN SU POSICION FINAL
+			ppiv = 5
+		quick_sort_rec(a, 1, 5-1)
+			lft=1, rgt=4
+			if 4 > 1 si
+				partition(a, 1, 4, ppiv)
+					ppiv=1, i=2, j=4
+					do 2 <= 4 si
+						if a[2] <=a[1] true i++
+					do 3 <= 4 si
+						if a[3] <= a[1] false
+						if a[4] >= a[1] false
+						swap(a, 3, 4)
+						[4, 1, 3, 5, 7, 9, 10]
+					do 3 <= 4 si
+						if a[3] <= a[1] true i++
+					do 4 <= 4 si
+						if a[4] <= a[1] false
+						if a[4] <= a[1] true j--
+					do 4 <= 3 no SALGO DEL CICLO
+					swap(a, 1, 3)
+					[3, 1, 4, 5, 7, 9, 10] EL 4 Y 7 ESTAN EN SUS POS FINALES
+					ppiv = 3
+				quick_sort_rec(a, 1, 3-1)
+					if 2 > 1 si
+					partition(a, 1, 2, ppiv)
+						ppiv=1, i=2, j=2
+						do 2<=2 si
+							if a[2] <= a[1] true i++
+						do 3 <= 2 no SALFO DEL CICLO
+						swap(a, 1, 2)
+						[1, 3, 4, 5, 7, 9, 10] EL 1, 4 Y 7 EN POS FINALES
+						ppiv = 2
+					quick_sort_rec(a, 1, 2-1)
+						if 1 > 1 no ENTONCES NO HAGO NADA
+					quick_sort_rec(a, 2+1, 1)
+						if 1 > 3 no ENTONCES NO HAGO NADA
+				quick_sort_rec(a, 3+1, 4)
+					if 4 > 4 no ENTONCES NO HAGO NADA
+		quick_sort_rec(a, 5+1, 7) XQ USO EL PPIV DEL MISMO NIVEL DE IDENTACION
+			if 7 > 6 si
+				partition(a, 6, 7, ppiv)
+					ppiv=6, i=7, j=7
+					do 7 >= 7 si
+						a[7] <= a[6] false
+						a[7] >= a[7] true j--
+					do 7 >= 6 no SALGO DEL CICLO
+					swap(a, 6, 6)
+					[1, 3, 4, 5, 7, 9, 10] NO CAMBIO NADA
+					ppiv=6
+				quick_sort_rec(a, 6, 6-1)
+					if 5 > 6 no ENTONCES NO HAGO NADA
+				quick_sort_rec(a, 6+1, 6)
+					if 6 > 7 no ENTONCES NO HAGO NADA
+LISTO TERMINE, LISTA ORDENADA: [1, 3, 4, 5, 7, 9, 10]
+
+
+Entonces la secuencia de llamadas al procedimiento quick_sort_rec es la siguiente:
+[7, 1, 10, 3, 4, 9, 5]
+quick_sort_rec(a, 1, 7)
+	partition(a, 1, 7, ppiv)
+		[4, 1, 5, 3, 7, 9, 10]
+	quick_sort_rec(a, 1, 4)
+		partition(a, 1, 4, ppiv)
+			[3, 1, 4, 5, 7, 9, 10]
+		quick_sort_rec(a, 1, 2)
+			partition(a, 1, 2, ppiv)
+				[1, 3, 4, 5, 7, 9, 10]
+			quick_sort_rec(a, 1, 1) NO HACE NADA
+			quick_sort_rec(a, 3, 1) NO HACE NADA
+		quick_sort_rec(a, 4, 4) NO HACE NADA
+	quick_sort_rec(a, 6, 7)
+		partition(a, 6, 7, ppiv)
+			[1, 3, 4, 5, 7, 9, 10]
+		quick_sort_rec(a, 6, 5) NO HACE NADA
+		quick_sort_rec(a, 7, 6) NO HACE NADA
+TERMINE
+```
+
+<pre><code>
+
+<span style="background-color:red;">a.2) [5, 4, 3, 2, 1]</span>
+<i>Elijo el pivot(<b>5</b>)</i>
+[<mark>5</mark>, <b>4</b>, <b>3</b>, 2, 1]
+<i>Comparo, 4&lt;5
+<i>Comparo 
+</code></pre>
