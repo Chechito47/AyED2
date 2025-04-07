@@ -367,11 +367,209 @@ quick_sort_rec(a, 1, 7)
 TERMINE
 ```
 
-<pre><code>
+
+
+
+<pre><code><span style="background-color:red;">a.1) [7, 1, 10, 3, 4, 9, 5]</span>
+<i>Elijo el pivot(7)</i>
+[<u>7</u>, 1, 10, 3, 4, 9, 5]
+<i>Comparo: 1&lt;7 si, 10&lt;7 no, 5&gt;7 no</i>
+<i>Hago swap entre 5 y 10</i>
+[<u>7</u>, 1, 5, 3, 4, 9, 10]
+<i>Sigo comparando: 1&lt;7 si, 5&lt;7 si, 3&lt;7 si, 4&lt;7 si, 9&lt;7 no, 10&gt;7 si, 9&gt;7 si</i>
+<i>No hago swap, solo ubico el pivot</i>
+[4, 1, 5, 3, <mark>7</mark>, 9 10]
+
+<i>Elijo el nuevo pivot(4)</i>
+[<u>4</u>, 1, 5, 3, <mark>7</mark>, 9, 10]
+<i>Comparo: 1&lt;4 si, 5&lt;4 no, 3&gt;4 no</i>
+<i>Hago swap entre 5 y 3</i>
+[<u>4</u>, 1, 3, 5, <mark>7</mark>, 9, 10]
+<i>Sigo comparando: 1&lt;4 si, 3&lt;4 si, 5&lt;4 no, 5&gt;4 si</i>
+<i>No hago swap, solo ubico el pivot</i>
+[3, 1, <mark>4</mark>, 5, <mark>7</mark>, 9, 10]
+
+<I>Elijo el nuevo pivot(3)</i>
+[<u>3</u>, 1, <mark>4</mark>, 5, <mark>7</mark>, 9, 10]
+<i>Comparo: 1&lt;3 si</i>
+<i>No hago swap, solo ubico el pivot</i>
+[1, <mark>3, 4</mark>, 5, <mark>7</mark>, 9, 10]
+
+<i>Elijo el nuevo pivot(1)</i>
+[<u>1</u>, <mark>3, 4</mark>, 5, <mark>7</mark>, 9, 10]
+<i>Lista de un solo elemento, trivial</i>
+[<mark>1, 3, 4</mark>, 5, <mark>7</mark>, 9, 10]
+
+<i>Elijo el nuevo pivot(5)</i>
+[<mark>1, 3, 4</mark>, <u>5</u>, <mark>7</mark>, 9, 10]
+<i>Lista de un solo elemento, trivial</i>
+[<mark>1, 3, 4, 5, 7</mark>, 9, 10]
+
+<i>Elijo el nuevo pivot(9)</i>
+[<mark>1, 3, 4, 5, 7</mark>, <u>9</u>, 10]
+<i>Comparo: 10&lt;9 no, 10&gt;9 si</i>
+<i>No hago swap, solo ubico el pivot</i>
+[<mark>1, 3, 4, 5, 7, 9</mark>, 10]
+
+<i>Elijo el nuevo pivot(10)</i>
+[<mark>1, 3, 4, 5, 7, 9</mark>, <u>10</u>]
+<i>Lista de un solo elemento, trivial</i>
+[<mark>1, 3, 4, 5, 7, 9, 10</mark>] <b>ARREGLO ORDENADO</b>
+
+
 
 <span style="background-color:red;">a.2) [5, 4, 3, 2, 1]</span>
-<i>Elijo el pivot(<b>5</b>)</i>
-[<mark>5</mark>, <b>4</b>, <b>3</b>, 2, 1]
-<i>Comparo, 4&lt;5
-<i>Comparo 
+<i>Elijo el pivot(5)</i>
+[<u>5</u>, <b>4</b>, <b>3</b>, 2, 1]
+<i>Comparo: 4&lt;5 si, 3&lt;5 si, 2&lt;5 si, 1&lt;5 si</i>
+<i>No hago swap, solo posiciono el pivot</i>
+[1, 4, 3, 2, <mark>5</mark>]
+
+<i>Elijo el nuevo pivot(1), el 5 ya esta en su posicion final</i>
+[<u>1</u>, 4, 3, 2, <mark>5</mark>]
+<i>Comparo: 4&lt;1 no, 2&gt;1 si, 3&gt;1 si, 4&gt;1 si</i>
+<i>No hago swap, solo posiciono el pivot</i>
+[<mark>1</mark>, 4, 3, 2, <mark>5</mark>]
+
+<i>Elijo el nuevo pivot (4)</i>
+[<mark>1</mark>, <u>4</u>, 3, 2, <mark>5</mark>]
+<i>Comparo: 3&lt;4 si, 2&lt;4 si</i>
+<i>No hago swap, solo posiciono el pivot</i>
+[<mark>1</mark>, 2, 3, <mark>4, 5</mark>]
+
+<i>Elijo el nuevo pivot(2)</i>
+[<mark>1</mark>, <u>2</u>, 3, <mark>4, 5</mark>]
+<i>Comparo: 3&lt;2 no</i>
+<i>No hago swap, posiciono pivot</i>
+[<mark>1, 2</mark>, 3, <mark>4, 5</mark>]
+
+<i>Elijo el nuevo pivot(3)</i>
+[<mark>1, 2</mark>, <u>3</u>, <mark>4, 5</mark>]
+<i>No puedo comparar nada</i>
+<i>Lista de un elemento, trivial</i>
+[<mark>1, 2, 3, 4, 5</mark>] <b>ARREGLO ORDENADO</b>
+
+
+
+<span style="background-color:red;">a.3) [1, 2, 3, 4, 5]</span>
+<i>Elijo el pivot(1)</i>
+[<u>1</u>, 2, 3, 4, 5]
+<i>Comparo: 2&lt;1 no, 5&gt;1 si, 4&gt;1 si, 3&gt;1 si, 2&gt;1 si</i>
+<i>No hago swap, solo ubico el pivot</i>
+[<mark>1</mark>, 2, 3, 4, 5]
+
+<i>Elijo el nuevo pivot(2)</i>
+[<mark>1</mark>, <u>2</u>, 3, 4, 5]
+<i>Comparo: 3&lt;2 no, 5&gt;2 si, 4&gt;2 si, 3&gt;2 si</i>
+<i>No hago swap, solo ubico el pivot</i>
+[<mark>1, 2</mark>, 3, 4, 5]
+
+<i>Elijo el nuevo pivot(3)</i>
+[<mark>1, 2</mark>, <u>3</u>, 4, 5]
+<i>Comparo: 4&lt;3 no, 5&gt;3 si, 4&gt;3 si</i>
+<i>No hago swap, solo ubico el pivot</i>
+[<mark>1, 2, 3</mark>, 4, 5]
+
+<i>Elijo el nuevo pivot(4)</i>
+[<mark>1, 2, 3</mark>, <u>4</u>, 5]
+<i>Comparo: 5&lt;4 no, 5&gt;4 si</i>
+<i>No hago swap, solo ubico el pivot</i>
+[<mark>1, 2, 3, 4</mark>, 5]
+
+<i>Elijo el nuevo pivot(5)</i>
+[<mark>1, 2, 3, 4</mark>, <u>5</u>]
+<i>Lista de un elemento, trivial</i>
+[<mark>1, 2, 3, 4, 5</mark>] <b>ARREGLO ORDENADO</b></code></pre>
+
+
+![ScreenShot](Imagenes%20practico%201.2/ej4.png)
+
+```pascal
+Entonces, debemos dar el elemento que tenga el valor medio entre el primero, ultimo y el de en medio
+ej: 4, 20, 10 => ppiv=10 xq 4 < 10 < 20
+a[lft]=4, a[mid]=20, a[rgt]=10 => a[lft] < a[rgt] < a[mid] => ppiv=rgt
+
+Si fuese: a[lft]=20, a[mid]=4, a[rgt]=10 => a[mid] < a[rgt] < a[lft] => ppiv=rgt
+
+Entonces es necesario poder decir cual sera el elemento de en medio, para eso podemos usar la formula del medio del merge sort: mid=(izq+der)/2 que redondea para abajo.
+
+Por lo tanto tengo 6 alternativas:
+a[lft] < a[mid] < a[rgt] => ppiv=mid
+a[rgt] < a[mid] < a[lft] => ppiv=mid
+
+a[mid] < a[lft] < a[rgt] => ppiv=lft
+a[rgt] < a[lft] < a[lft] => ppiv=lft
+
+a[mid] < a[rgt] < a[lft] => ppiv=rgt
+a[lft] < a[rgt] < a[mid] => ppiv=rgt
+```
+
+<pre><code>
+<b>proc</b> partition (<b>in/out</b> a: <b>array[1..n] of T</b>, <b>in</b> lft, rgt: <b>nat</b>,
+				<b>out</b> ppiv: <b>nat</b>)
+	<b>var</b> mid, i, j: <b>nat</b>
+	i := lft + 1
+	j := rgt
+	mid := (lft + rgt)/2
+	<b>if</b> a[lft] &lt;= a[mid] ^ a[mid] &lt;= a[rgt] <b>then</b> ppiv := mid
+	   a[rgt] &lt;= a[mid] ^ a[mid] &lt;= a[lft] <b>then</b> ppiv := mid
+	   a[mid] &lt;= a[lft] ^ a[lft] &lt;= a[rgt] <b>then</b> ppiv := lft
+	   a[rgt] &lt;= a[lft] ^ a[lft] &lt;= a[mid] <b>then</b> ppiv := lft
+	   a[mid] &lt;= a[rgt] ^ a[rgt] &lt;= a[lft] <b>then</b> ppiv := rgt
+	   a[lft] &lt;= a[rgt] ^ a[rgt] &lt;= a[mid] <b>then</b> ppiv := rgt
+	<b>fi</b>
+	<b>do</b> i &lt;= j
+		<b>if</b> a[i] &lt;= a[ppiv] <b>then</b> i++
+		   a[j] &gt;= a[ppiv] <b>then</b> j--
+		   a[i] &gt; a[ppiv] ^ a[j] &lt; a[ppiv] <b>then</b> swap(a, i, j)
+		<b>fi</b>
+	<b>od</b>
+	swap(a, ppiv, j)
+	ppiv := j
+<b>end proc</b>
 </code></pre>
+
+```pascal
+Aunque *CREO* que tambien podriamos hacer uso de una funcion para devolver ppiv:
+```
+
+<pre><code>
+<b>proc</b> partition (<b>in/out</b> a: <b>array[1..n] of T</b>, <b>in</b> lft, rgt: <b>nat</b>,
+				<b>in/out</b> ppiv: <b>nat</b>)
+	<b>var</b> mid, i, j: <b>nat</b>
+	i := lft + 1
+	j := rgt
+	mid := (lft + rgt)/2
+	ppiv := buscar_ppiv(a, lft, rgt, mid)
+	<b>do</b> i &lt;= j
+		<b>if</b> a[i] &lt;= a[ppiv] <b>then</b> i++
+		   a[j] &gt;= a[ppiv] <b>then</b> j--
+		   a[i] &gt; a[ppiv] ^ a[j] &lt; a[ppiv] <b>then</b> swap(a, i, j)
+		<b>fi</b>
+	<b>od</b>
+	swap(a, ppiv, j)
+	ppiv := j
+<b>end proc</b>
+
+
+<b>fun</b> buscar_ppiv(<b>in/out</b>a: <b>array[1..N] of T</b>, <b>in</b> lft, rgt, mid: <b>nat</b>,
+				<b>ret</b> ppiv:<b>nat</b>)
+	<b>if</b> a[lft] &lt;= a[mid] ^ a[mid] &lt;= a[rgt] <b>then</b> ppiv := mid
+	   a[rgt] &lt;= a[mid] ^ a[mid] &lt;= a[lft] <b>then</b> ppiv := mid
+	   a[mid] &lt;= a[lft] ^ a[lft] &lt;= a[rgt] <b>then</b> ppiv := lft
+	   a[rgt] &lt;= a[lft] ^ a[lft] &lt;= a[mid] <b>then</b> ppiv := lft
+	   a[mid] &lt;= a[rgt] ^ a[rgt] &lt;= a[lft] <b>then</b> ppiv := rgt
+	   a[lft] &lt;= a[rgt] ^ a[rgt] &lt;= a[mid] <b>then</b> ppiv := rgt
+	<b>fi</b>
+<b>end fun</b>
+</code></pre>
+
+![ScreenShot](Imagenes%20practico%201.2/ej5.png)
+
+```pascal
+k es a la sumo n. Devuelve el elemento a[k] si estuviera ordenado.
+Tenemos que usar el proc partition, ya que este devuelve un entero en su posicion final.
+```
+
+<pre><code>
+<b>fun</b> k-esimo(<b>in</b>a: <b>array[1..N] of T</b>, k: <b>nat</b>, <b>ret</b> res: <b>nat</b>)
