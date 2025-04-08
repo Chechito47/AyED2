@@ -568,8 +568,341 @@ Aunque *CREO* que tambien podriamos hacer uso de una funcion para devolver ppiv:
 
 ```pascal
 k es a la sumo n. Devuelve el elemento a[k] si estuviera ordenado.
-Tenemos que usar el proc partition, ya que este devuelve un entero en su posicion final.
+
+Es un algoritmo conocido como quick select, es una version modificada del quick sort que sirve para encontrar el k-esimo elemento mas pequeño de un arreglo sin ordenarlo completamente (aunque se podria dar el caso que se termine ordenando indirectamente)
+La idea es usar el partition, ya que elije un pivote y reordena el arreglo tal que a la izquierda queden los menores del pivot y a la derecha los mayores o iguales dejando al pivot en su posicion final.
+Entonces si el pivot termina siendo el k listo. Si no:
+	Si es menor buscamos en la parte derecha del arreglo
+	Si es mayor buscamos en la parte izquierda del arreglo
 ```
 
 <pre><code>
-<b>fun</b> k-esimo(<b>in</b>a: <b>array[1..N] of T</b>, k: <b>nat</b>, <b>ret</b> res: <b>nat</b>)
+<b>fun</b> quick_select(<b>in</b> a: <b>array[1..N] of T</b>, k: <b>nat</b>, <b>ret</b> res: <b>int</b>)
+	<b>var</b> lft, rgt, ppiv: <b>nat</b>
+	lft := 1
+	rgt := n
+	ppiv := partition(a, lft, rgt, ppiv)
+	<b>do</b> ppiv != k
+		<b>if</b> ppiv &lt; k <b>then</b> lft := ppiv + 1
+    	   ppiv > k <b>then</b> rgt := ppiv -1
+		<b>fi</b>
+	ppiv := partition(a, lft, rgt, ppiv)
+	<b>od</b>
+	res := a[k]
+<b>end fun</b>
+</code></pre>
+
+```pascal
+Supongamos a=[4, 1, 3, 2], k=1
+lft=1, rgt=4
+partition(a, 1, 4, ppiv)
+	ppiv=1, i=2, rgt=4
+	Elijo el pivot(4)
+	Comparo: 1 < 4 si => i=3
+			 3 < 4 si => i=4
+			 2 < 4 si => i=5
+			 (i<=j no se cumple)
+	Ubico el pivot
+	[2, 1, 3, 4], ppiv=4
+ppiv!=k => ppiv > k => rgt=ppiv-1 => rgt=3
+
+lft=1, rgt=3
+partition(a, 1, 3, ppiv=4)
+	ppiv=1, i=2, rgt=3
+	Elijo el pivot(2)
+	Comparo: 1 < 2 si => i=3
+			 3 < 2 no
+			 (recorri toda la sublista)
+	Ubico el pivot
+	[1, 2, 3, 4], ppiv =3
+ppiv!=k => ppiv > k => rgt=ppiv-1 => rgt=2
+
+lft=1, rgt=2
+partition(a, 1, 2, ppiv)
+	ppiv=1, i=2, j=2
+	Elijo el pivot(1)
+	Comparo: 2 < 1 no
+			 2 > 1 si
+			 (recorri toda la sublista)
+	Ubico el pivot
+	[1, 2, 3, 4], ppiv=2
+ppiv!=k => ppiv > k => rgt=ppiv-1 => rgt=1
+
+lft=1, rgt=1
+partition(a, 1, 1, ppiv)
+	ppiv=1, i=2, j=1
+	No puedo hacer comparaciones, solo ubico el pivot (i<=j no se cumple)
+	[1, 2, 3, 4], ppiv=1
+ppiv=k => LISTO, ENCONTRE EL K QUE BUSCABA
+
+
+
+
+Otro ejemplo, a=[3, 5, 6, 1, 2], k=2
+lft=1, rgt=5
+partition(a, 1, 5, ppiv)
+	ppiv=1, i=2, rgt=5
+	Elijo el pivot(3)
+	Comparo: 5 < 3 no
+			 2 > 3 no
+	Entonces hago swap(a, 5, 2)
+	[3, 2, 6, 1, 5]
+	Comparo: 2 < 3 si => i=3
+			 6 < 3 no
+			 5 > 3 si => j=4
+			 1 > 3 no
+	Entonces hago swap(a, 6, 1)
+	[3, 2, 1, 6, 5]
+	Comparo: 2 < 3 si => i=3
+			 1 < 3 si => i=4
+			 6 < 3 no
+			 6 > 3 si => j=3
+			 (i<=j no se cumple)
+	Ubico el pivot
+	[1, 2, 3, 6, 5], ppiv=3
+ppiv!=k => ppiv > k => rgt=ppiv-1 => rgt=2
+
+lft=1, rgt=2
+partition(a, 1, 2, ppiv)
+	ppiv=1, i=2, j=2
+	Elijo el pivot(1)
+	Comparo: 2 < 1 no
+			 2 > 1 si => j=1
+			 (i<=j no se cumple)
+	Ubico el pivot
+	[1, 2, 3, 6, 5], ppiv=1
+ppiv!=k => ppiv < k => lft=ppiv+1 => lft=2
+
+lft=2, rgt=2
+partition(a, 2, 2, ppiv)
+	ppiv=2, i=3, j=2
+	(i<=j no se cumple)
+	No puedo comparar, ubico el pivot
+	[1, 2, 3, 6, 5], ppiv=2
+ppiv=k LISTO, ENCONTRE EL K QUE BUSCABA
+
+
+
+
+Parece que es normal que a la segunda llamada de partition se encuentre el a[k] bien posicionado a pesar que ppiv!=k.  Veamos un ejemplo donde eso no sucede:
+
+Supongamos a=[9, 8, 7, 6, 5, 4, 3, 2, 1], k=3
+lft=1, rgt=9
+partition(a, 1, 9, ppiv)
+	ppiv=1, i=2, j=9
+	Elijo el pivot(9)
+	Comparo: 8 < 9 si => i=3
+			 7 < 9 si => i=4
+			 6 < 9 si => i=5
+			 5 < 9 si => i=6
+			 4 < 9 si => i=7
+			 3 < 9 si => i=8
+			 2 < 9 si => i=9
+			 1 < 9 si => i=10
+			 (i<=j falso)
+	Ubico el pivot
+	[1, 8, 7, 6, 5, 4, 3, 2, 9], ppiv=9
+ppiv!=k => ppiv > k => rgt=ppiv-1 => rgt=8
+
+lft=1, rgt=8
+partition(a, 1, 8, ppiv)
+	ppiv=1, i=2, j=8
+	Elijo el pivot(1)
+	Comparo: 8 < 1 no
+			 2 > 1 si => j=7
+			 3 > 1 si => j=6
+			 4 > 1 si => j=5
+			 5 > 1 si => j=4
+			 6 > 1 si => j=3
+			 7 > 1 si => j=2
+			 8 > 1 si => j=1
+			 (i<=j false)
+	Ubico el pivot
+	[1, 8, 7, 6, 5, 4, 3, 2, 9], ppiv=1
+ppiv!=k => ppiv < k => lft=ppiv+1 => lft=2
+
+lft=2, rgt=8
+partition(a, 2, 8, ppiv)
+	ppiv=2, i=3, j=8
+	Elijo el pivot(8)
+	Comparo: 7 < 8 si => i=4
+			 6 < 8 si => i=5
+			 5 < 8 si => i=6
+			 4 < 8 si => i=7
+			 3 < 8 si => i=8
+			 2 < 8 si => i=9
+			 (i<=j false)
+	Ubico el pivot
+	[1, 2, 7, 6, 5, 4, 3, 8, 9], ppiv=8
+ppiv!=k => ppiv > k => rgt=ppiv-1 => rgt=7
+
+lft=2, rgt=7
+partition(a, 2, 7, ppiv)
+	ppiv=2, i=3, j=7
+	Elijo el pivot(2)
+	Comparo: 7 < 2 no
+			 3 > 2 si => j=6
+			 4 > 2 si => j=5
+			 5 > 2 si => j=4
+			 6 > 2 si => j=3
+			 7 > 2 si => j=2
+			 (i<=j false)
+	Ubico el pivot
+	[1, 2, 7, 6, 5, 4, 3, 8, 9], ppiv=2
+ppiv!=k => ppiv < k => lft=ppiv+1 => lft=3
+
+lft=3, rgt=7
+partition(a, 3, 7, ppiv)
+	ppiv=3, i=4, j=7
+	Elijo el pivot(7)
+	Comparo: 6 < 7 si => i=5
+			 5 < 7 si => i=6
+			 4 < 7 si => i=7
+			 3 < 7 si => i=8
+			 (i<=j false)
+	Ubico el pivot
+	[1, 2, 3, 6, 5, 4, 7, 8, 9], ppiv=7
+ppiv!=k => ppiv > k => rgt=ppiv-1 => rgt=6
+
+lft=3, rgt=6
+partition(a, 3, 6, ppiv)
+	ppiv=3, i=4, j=6
+	Elijo el pivot(3)
+	Comparo: 6 < 3 no
+			 4 > 3 si => j=5
+			 5 > 3 si => j=4
+			 6 > 3 si => j=3
+			 (i<=j false)
+	Ubico el pivot
+	[1, 2, 3, 6, 5, 4, 7, 8, 9], ppiv=3
+ppiv=k LISTO, ENCONTRE EL K QUE BUSCABA
+
+Por lo tanto vemos que la implementacion funciona correctamente
+```
+
+![ScreenShot](Imagenes%20practico%201.2/ej6.png)
+
+```pascal
+Queremos que partition separe en 3 segmentos:
+	menores que ppiv
+	iguales que ppiv
+	mayores que ppiv
+Luego debemos devolver pivot_lft y pivot_rgt
+lt -> limite izquierdo en el que iteramos
+gt -> limite derecho en el que iteramos
+```
+
+<pre><code>
+<b>proc</b> partition3 (<b>in/out</b> a: <b>array[1..n] of T</b>, <b>in</b> lft, rgt: <b>nat</b>,
+				<b>in/out</b> ppiv_lft, ppiv_rgt: <b>nat</b>)
+	<b>var</b> lt, i, gt: <b>nat</b>
+	lt := lft
+	i := lft + 1
+	gt := rgt
+	<b>do</b> i &lt;= gt
+		<b>if</b> a[i] &lt; a[lft] <b>then</b>
+				swap(a, lt, i)
+				lt := lt + 1
+				i := i +1
+		   a[i] &gt; a[lft] <b>then</b>
+				swap(a, i, gt)
+				gt := gt -1
+		   a[i] == a[lft] <b>then</b> i := i + 1
+		<b>fi</b>
+	<b>od</b>
+	ppiv_lft := lt
+	ppiv_rgt := gt
+<b>end proc</b></code></pre>
+
+```pascal
+Supongamos que tenemos la lista a[2, 2, 5, 7]
+lt=1, i=2, gt=4, a[lft]=2
+do 2 <= 4
+	if 2 < 2 no
+	   2 > 2 no
+	   2 == 2 si => i=3
+do 3 <= 4
+	if 5 < 2 no
+	   5 > 2 si => swap(a, 3, 4) => [2, 2, 7, 5], gt=3
+do 3 <= 3
+	if 7 < 2 no
+	   7 > 2 si => swap(a, 3, 3) => [2, 2, 7, 5], gt=2
+do 3 <= 2 false
+
+ppiv_lft = 1
+ppiv_rgt=2
+
+
+
+Veamos con otra lista: a[2, 1, 4, 4, 3, 5]
+lt=1, i=2, gt=6, a[lft]=2
+do 2 <= 6
+	1 < 2 si => swap(a, 1, 2)=>[1, 2, 4, 4, 3, 5], lt=2, i=3
+do 3 <= 6
+	4 < 2 no
+	4 > 2 si => swap(a, 3, 6)=>[1, 2, 5, 4, 3, 4], gt=5
+do 3 <= 5
+	5 < 2 no
+	5 > 2 si => swap(a, 3, 5)=>[1, 2, 3, 4, 5, 4], gt=4
+do 3 <= 4
+	3 < 2 no
+	3 > 2 si => swap(a, 3, 4) =>[1, 2, 4, 3, 5, 4], gt=3
+do 3 <= 3
+	4 < 2 no
+	4 > 2 si => swap(a, 3, 3) =>[1, 2, 4, 3, 5, 4], gt=2
+do 3 <= 2 no
+
+ppiv_lft=2
+ppiv_rgt=2
+
+Parece que funciona
+Veamos con el mismo ejemplo pero con varios elementos iguales al pivot
+a[2, 1, 2, 4, 4, 3, 2, 5]
+lt=1, i=2, gt=8, a[lft]=2
+do 2 <= 8
+	1 < 2 si =>swap(a, 1, 2)=>[1, 2, 2, 4, 4, 3, 2, 5], lt=2, i=3
+do 3 <= 8
+	2 < 2 no
+	2 > 2 no
+	2 == 2 si => i=4
+do 4 <= 8
+	4 < 2 no
+	4 > 2 si =>swap(a, 4, 8)=>[1, 2, 2, 5, 4, 3, 2, 4], gt=7
+do 4 <= 7
+	5 < 2 no
+	5 > 2 si=>swap(a, 4, 7)=>[1, 2, 2, 2, 4, 3, 5, 4], gt=6
+do 4 <= 6
+	2 < 2 no
+	2 > 2 no
+	2 == 2 si => i=5
+do 5 <= 6
+	4 < 2 no
+	4 > 2 si =>swap(a, 5, 6)=>[1, 2, 2, 2, 3, 4, 5, 4], gt=5
+do 5 <= 5
+	3 < 2 no
+	3 > 2 si=>swap(a, 5, 5)=>[1, 2, 2, 2, 3, 4, 5, 4], gt=4
+do 5 <= 4 no
+
+ppiv_lft=2
+ppiv_rgt=4
+
+Por lo tanto, vemos que ppiv_lft nos indica el comienzo del segmento iguales al pivot y ppiv_rgt el fin del segmento igual al pivot
+
+Entonces(llaves matematicas)
+[lft, ppiv_lft) => menores al pivot
+[ppiv_lft, ppiv_rgt] => iguales al pivot
+(ppiv_rgt, rgt] => mayores al pivot
+
+Luego modificamos quick_sort_rec:
+```
+
+<pre><code>
+<b>proc</b> quick_sort_rec3(<b>in</b> a: <b>array[1..N] of T</b>, <b>in</b> lft, rgt: <b>nat</b>)
+	<b>var</b> ppiv_lft, ppiv_rgt: <b>nat</b>
+	<b>if</b> lft &lt; rgt <b>then</b>
+		partition3(a, lft, rgt, ppiv_lft, ppiv_rgt)
+		quick_sort_rec3(a, lft, ppiv_lft-1)
+		quick_sort_rec3(a, ppiv_rgt+1, rgt)
+	<b>fi</b>
+<b>end proc</b>
+</code></pre>
