@@ -1,3 +1,10 @@
+Ordenación por selección es del orden de n2 .
+Ordenación por inserción es del orden de n2 (peor caso y
+caso medio).
+Ordenación por intercalación es del orden de n log2 n.
+Ordenación rápida es del orden de n log2 n (caso medio).
+Búsqueda lineal es del orden de n.
+Búsqueda binaria es del orden de log2 n.
 ## Algortimos, ¿Que hacen?¿Como lo hacen?
 ***Algortimo***: es como una receta, **serie de pasos para resolver un problema**. No tiene relacion con el codigo.
 ### ¿Que hace?
@@ -145,9 +152,99 @@ Ahora elijo (3) como pivot pero al ser lista de un solo elemento es trivial
 IDEM con pivot (7)  
 [1, 2, 3] y [3, 5, 7, 9]  **LISTA YA ORDENADA**  
 
+Tambien se puede hacer de la siguiente manera (usando partition):  
+[*3*, 9, 2, 1, 7, 3, 5]  
+Comparo: 9<=2 no, 5>=3 si, 3>=3 si, 7>=3 si, 1>=3 no => swap(a, 9, 1)  
+[*3*, 1, 2, 9, 7, 3, 5]  
+Sigo comparando: 1<=3 si, 2<=3 si, 9<=3 no, 9>=3 si => solo ubico el pivot  
+[1, 2, ==3==, 9, 7, 3, 5]  
+Elijo el nuevo pivot(1)  
+Comparo: 2<=1 no => solo ubico el pivot  
+[==1==, 2, ==3==, 9, 7, 3, 5]  
+Elijo el nuevo pivot(2)  
+Comparo: lista trivial de un solo elemento => solo ubico el pivot  
+[==1, 2, 3==, 9, 7, 3, 5]  
+Elijo el nuevo pivot(9)  
+Comparo: 7<=9 si, 3<=9 si, 5<=9 si => solo ubico el pivot  
+[==1, 2, 3==, 5, 7, 3, ==9==]  
+Elijo el nuevo pivot(5)  
+Comparo: 7<=5 no, 9>=5 si, 3>=5 no => swap(a, 7, 3)  
+[==1, 2, 3==, 3, 7, 5, ==9==]  
+Elijo el nuevo pivot(3)  
+Comparo: 7<=3 no, 5>=3 si, 7>=3 => solo ubico el pivot  
+[==1, 2, 3, 3==, 7, 5, ==9==]  
+Elijo el nuevo pivot(7)  
+Comparo: 5<=7 si => solo ubico el pivot  
+[==1, 2, 3, 3==, 5, ==7, 9==]  
+Elijo el nuevo pivot(5)  
+Lista de un solo elemento, trivial  
+[==1, 2 3, 3, 5, 7, 9==]  
+
 ### Funcion partition
 Es la **encargada de acomodar a los elementos menores del pivot** en la parte izquierda **y los mayores iguales** en la derecha para luego **colocar al pivot en la posicion que le corresponde**.  
 Va mirando al elemento mas a la izquierda (sin contar al pivot) y al de mas a la derecha, mientras encuentre elementos que esten bien ubicados (o sea si de la izquierda se encuentra un elemento menor que el pivot) avanza sin hacer nada, si no no avanza del lado que hay un elemento mal ubicado y si lo hace del otro hasta encontrar un elemento mal ubicado y hace una paermutacion.
 ### Ejemplo (siguiendo con el anterior)
-Veamos que hizo la funcion partition en el ejemplo anterior:  
-[3, 9, 2, 1, 7, 3, 5]
+Veamos que hizo la funcion partition en el ejemplo anterior:    
+```pascal
+[3, 9, 2, 1, 7, 3, 5]  
+lft=1, rgt=7  
+partition(a, lft, rgt, ppiv)  
+	ppiv=1, i=2, j=7
+	do 2<=7  
+		if 9<=3 no
+		if 5>=3 si => j=6
+		   3>=3 si => j=5
+		   7>=3 si => j=4
+		   1>=3 no => swap(a, 9, 1)
+		[3, 1, 2, 9, 7, 3, 5]
+	do 2<=4
+		if 1<=3 si => i=3
+		   2<=3 si => i=4
+		   9<=3 no
+		   9>=3 si => j=3
+		   (i<=j false)
+	Ubico el pivot
+	swap(a, ppiv, j) => swap(a, 1, 3)
+	[2, 1, 3, 9, 7, 3, 5]
+	ppiv=3
+```
+
+## Comparar los ordenes de los algoritmos
+Escribimos **f(n) ⊏ g(n)** para indicar que **g(n) crece mas rapido que f(n)**. Por ejemplo:  
+- (n log₂n) ⊏ (n²)
+- (log₂n) ⊏ (n)  
+*Es como si fuera un <*  
+
+Escribimos **f(n) ≈ g(n)** para indicar que **g(n) y f(n) crecen al mismo ritmo**. Por ejemplo:  
+- n²/2 - n/2 ≈ n²
+- 45n² ≈ n²
+
+Notemos que **no nos interesan las constantes multiplicativas**, por ejemplo:  
+- 4n² ≈ n²
+- 1000 log n ≈ log n
+
+**Tampoco nos interesan los terminos menos significativos que crecen mas lento**:
+- n² + n ≈ n²
+- n³ + n² log₂n ≈ n³
+- log n + 3500 ≈ log n  
+*En cierta forma es similar a la notacion O grande y o chiquita*
+
+**Sea f (n) > 0** para “casi todo n ∈ N”. Entonces:
+- g(n) ⊏ h(n) ⇐⇒ f(n)g(n) ⊏ f(n)h(n)
+- g(n) ≈ h(n) ⇐⇒ f(n)g(n) ≈ f(n)h(n)
+
+**Sea lim h(n) = ∞** *cuando n→∞*. Entonces:
+- f(n) ⊏ g(n) ⇒ f (h(n)) ⊏ g(h(n))
+- f(n) ≈ g(n) ⇒ f (h(n)) ≈ g(h(n))
+
+*Ejemplo de jerarquia:*
+1 ⊏ log₂n ≈ log₃n ⊏ n⁰·⁰⁰¹ ⊏ n¹·⁵ ⊏ n² ⊏ n⁵ ⊏ n¹⁰⁰ ⊏ (1.01)^n ⊏ 2^n ⊏ 100^n ⊏ 10000^n ⊏ n! ⊏ n^n
+
+**Regla del límite**. Sean f (n) y g(n) tales que:
+- **lim** *n→+∞* **f(n)** = **lim** *n→+∞* **g(n)** ***= ∞*** y
+- **lim** *n→+∞* **f(n)/g(n) existe**
+Entonces:
+1. Si **lim** *n→+∞* **f(n)/g(n) = 0** entonces **f(n) ⊏ g(n)**
+2. Si **lim** *n→+∞* **f(n)/g(n) = +∞** entonces **g(n) ⊏ f(n)**
+3. Caso contrario **f(n) ≈ g(n)** *(el limite es un nro real positivo)*
+
