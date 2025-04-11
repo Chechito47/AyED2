@@ -310,3 +310,71 @@ Vemos que dividimos en 3 la lista, cuando la cima esta en el lado izq, cuando es
 
 a=0, b=3, k=0 => 0 = 3⁰ = 0 => n⁰ log n
 ```
+
+![ScreenShot](Imagenes%20practico%201.3/ej3.png)
+
+```pascal
+Primero vemos que es de tipo DyV porque se llama a si misma con un orden menor.
+¿Que hace? Retorna el elemento minimo del arreglo
+¿Como lo hace? Hace uso de dos variables las cuales serviran como extremos, si son iguales => trivial, el minimo es el unico elemento
+Caso contrario hace uso de un mid y busca el minimo entre las dos mitades resultantes de dividir el arreglo
+Analicemos las operaciones:
+
+if (i=k) then m=a[i]
+Por lo tanto vemos que es irrelevante
+
+else
+	j=(i+k)/2
+	Irrelevante tambien
+
+	m=min(minimo(a, i, j), minimo(a, j+1, k))
+	Esta es relevante
+	a=2
+	b=2
+	k=0
+	=> 2 > 2⁰=> 2 > 1 => orden n^(log₂2)
+```
+
+![ScreenShot](Imagenes%20practico%201.3/ej4.png)
+```pascal
+a) (2^n) ⊏ (n log 2^n) ⊏ (2^n log n) ⊏ (n! log n)
+
+b) (2^4 log n) ⊏ (n⁴ + 2 log n) ⊏ (n³ log n) ⊏ (4^n)
+
+c) (n log n) ⊏ (log n^n) ⊏ (log n!)
+```
+
+![ScreenShot](Imagenes%20practico%201.3/ej5.png)
+
+```pascal
+Vemos que es DyV porque se invoca a si mismo con un orden menor.
+Vemos que toma dos constantes: K la cual nos indica la cantidad de divisiones que haremos. L indica en cuantas partes hacemos esas divisiones sobre el arreglo
+¿Que hace? Algo relacionado a O grande
+¿Como lo hace? Si el arreglo tiene un elemento o menos no hace nada. Caso contrario primero itera desde el primer elemento hasta el K dividiendo en la cantidad de veces indicada por L
+Luego itera desde 1 hasta n⁴ haciendo la operacion O grande
+
+Analicemos las operaciones:
+if n<=1 then skip
+Irrelevante
+
+for i=1 to K do f(n div L)
+a=K
+b=L
+k=?
+
+
+for i=1 to n⁴ do operacion_de_O(1)
+No es recursiva, la puedo analizar normalmente
+=> orden n⁴
+
+Entonces tenemos:
+t(n) | 0 si n<1
+	 | K*t(n/L) + n⁴
+=> a=K, b=L, k=4
+
+=> K=L⁴
+
+Entonces:
+
+a) n⁴ log n -> es el caso
+```

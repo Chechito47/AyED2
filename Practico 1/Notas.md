@@ -270,6 +270,10 @@ Notemos que **no nos interesan las constantes multiplicativas**, por ejemplo:
 *Ejemplo de jerarquia:*
 1 ⊏ log₂n ≈ log₃n ⊏ n⁰·⁰⁰¹ ⊏ n¹·⁵ ⊏ n² ⊏ n⁵ ⊏ n¹⁰⁰ ⊏ (1.01)^n ⊏ 2^n ⊏ 100^n ⊏ 10000^n ⊏ n! ⊏ n^n
 
+![ScreenShot](Imagenes%20teorico/jerarquia_1.png)
+
+![ScreenShot](Imagenes%20teorico/jerarquia_2.png)
+
 **Regla del límite**. Sean f (n) y g(n) tales que:
 - **lim** *n→+∞* **f(n)** = **lim** *n→+∞* **g(n)** ***= ∞*** y
 - **lim** *n→+∞* **f(n)/g(n) existe**
