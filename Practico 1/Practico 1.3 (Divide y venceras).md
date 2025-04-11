@@ -376,5 +376,67 @@ t(n) | 0 si n<1
 
 Entonces:
 
-a) n⁴ log n -> es el caso
+a) n⁴ log n -> es el caso a=b^k
+Propongo K=1, L=1 => 1=1⁴
+Luego n^k log n => n⁴ log n
+
+b) n⁴ -> es el caso a < b^k
+Propongo K=0, L=1 => 0 < 1⁴
+Luego n^k => n⁴
+
+c) n⁵ -> es el caso a < b^k
+Propongo K=1, L=1.5 => 1 < 1.5⁴ => 1 < 5
+Luego n^k => n⁵
 ```
+
+![ScreenShot](Imagenes%20practico%201.3/ej6_a.png)
+![ScreenShot](Imagenes%20practico%201.3/ej6_b.png)
+
+```pascal
+a) n² + 2 log n => 2 log n + n^2
+Entonces tenemos una funcion recursiva la cual a=b^k y tenemos otra funcion la cual no es recursiva cuyo orden es n²
+Entonoces notemos que el lenguaje no sabe multiplicaciones ni logaritmos por lo tanto no sabe lo que es un n² o un log n.
+No puedo hacer for i=1 to n²
+Por lo que debo hacer primero una funcion de orden n² y luego otra de orden 2 log n (funciones distintas al mismo nivel porque hay un +)
+```
+
+<pre><code>
+<b>proc</b> 6_a(<b>in</b> n: <b>nat</b>)
+	<b>var</b> k: <b>int</b>
+	k := -10
+	<b>for</b> i := 1 <b>to</b> n <b>do</b>
+		<b>for</b> j := 1 <b>to</b> n <b>do</b>
+			k := k +1
+		<b>od</b>
+	<b>od</b>
+
+	<b>for</b> i := 1 <b>to</b> 2 <b>do</b>
+		6_a(k div 2)
+	<b>od</b>
+<b>end proc</b>
+</code></pre>
+
+```pascal
+El que hace no importa, analicemos las operaciones:
+Primero tenemos 2 for, uno dentro del otro:
+Ops(a) = Σ 1 to n (Σ 1 to n)
+	   = Σ 1 to n (n)
+	   = n * n
+	   = n²
+
+Luego analizamos el otro for, este es recursivo:
+for i=1 to 2 do
+	6_a(k div 2)
+
+Entonces
+t(n) = 2*(n/2) + n²
+=> a=2, b=2, k=1
+2 = 2¹ => 2=2 => n¹ log n
+
+Por lo tanto junto las dos cosas y queda
+n log n + n²
+```
+
+
+
+
