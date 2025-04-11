@@ -209,6 +209,36 @@ partition(a, lft, rgt, ppiv)
 	ppiv=3
 ```
 
+## Algoritmo divide y venceras
+Tiene la siguiente forma:
+```pascal
+fun DyV(x) ret y
+	if x suficientemente pequeño o simple then y := ad_hoc(x)
+	else descomponer x en x1 , x2 , . . . , xa
+		for i:= 1 to a do yi := DyV(xi ) od
+		combinar y1 , y2 , . . . , ya para obtener la solución y de x
+	fi
+end fun
+```
+Donde:
+- ***a***: numero de llamadas recursivas a DyV
+- ***b***: cantidad de veces que divido mi problema
+- ***k***: orden del polinomio
+
+Para contar el orden computacional usamos:  
+***t(n)***  = **c** -> Si la entrada es muy pequeña (0 o 1)
+    = **a * t(n/b) + g(n)**
+
+Donde ***n*** es numero de entrada, como el largo del array y ***g(n)*** algun costo computacional extra
+
+![ScreenShot](Imagenes%20teorico/orden1.png)
+
+Entonces luego podemos dar el orden segun:
+- **n^(logₓa)** si **a > b^k** 
+- **n^k log n** si **a = a^k** 
+- **n^k**          si  **a < b^k** 
+
+![ScreenShot](Imagenes%20teorico/orden2.png)
 ## Comparar los ordenes de los algoritmos
 Escribimos **f(n) ⊏ g(n)** para indicar que **g(n) crece mas rapido que f(n)**. Por ejemplo:  
 - (n log₂n) ⊏ (n²)

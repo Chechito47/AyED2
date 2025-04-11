@@ -5,6 +5,7 @@ Ponerle nombre a los practicos despues de los nros, caso contrario no funciona e
 <ctrl shif u 2248> -> ≈
 <ctrl shift u 2082> -> algo₂
 <ctrl shift u 0387> -> algo·
+<ctrl shift u 2093> ->algoₓ
 
 
 ```mermaid
