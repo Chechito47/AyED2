@@ -337,11 +337,11 @@ else
 
 ![ScreenShot](Imagenes%20practico%201.3/ej4.png)
 ```pascal
-a) (2^n) ⊏ (n log 2^n) ⊏ (2^n log n) ⊏ (n! log n)
+a) (n log 2^n) ⊏ (2^n) ⊏ (2^n log n) ⊏ (n! log n)
 
 b) (2^4 log n) ⊏ (n⁴ + 2 log n) ⊏ (n³ log n) ⊏ (4^n)
 
-c) (n log n) ⊏ (log n^n) ⊏ (log n!)
+c) (log n!) ⊏ (log n^n) ⊏ (n log n)
 ```
 
 ![ScreenShot](Imagenes%20practico%201.3/ej5.png)
@@ -398,6 +398,7 @@ Entonces tenemos una funcion recursiva la cual a=b^k y tenemos otra funcion la c
 Entonoces notemos que el lenguaje no sabe multiplicaciones ni logaritmos por lo tanto no sabe lo que es un n² o un log n.
 No puedo hacer for i=1 to n²
 Por lo que debo hacer primero una funcion de orden n² y luego otra de orden 2 log n (funciones distintas al mismo nivel porque hay un +)
+Notemos que para el recursivo queremos que a=b^k entonces n^k log n = 2¹ log n por lo tanto debe ser tal que Σ1 to 2 recursivo => a=2, b=?, k=?
 ```
 
 <pre><code>
@@ -431,12 +432,179 @@ for i=1 to 2 do
 Entonces
 t(n) = 2*(n/2) + n²
 => a=2, b=2, k=1
-2 = 2¹ => 2=2 => n¹ log n
+2 = 2¹ => 2=2 => 2¹ log n
 
 Por lo tanto junto las dos cosas y queda
-n log n + n²
+2 log n + n²
+
+
+
+b) n² log n
+Nuevamente estamos en el caso a=b^k => n^k log n
+Especificamente queremos que n^k log n con k=2 => n² log n
+Por lo tanto puedo hacer algo similar al caso anterior con la diferencia de que Σ 1 to n
 ```
 
+<pre><code>
+<b>fun</b> 6_b(<b>in</b> n:<b>nat</b>), <b>ret</b> res:<b>nat</b>
+	<b>if</b> n &lt;= 1 <b>then</b>
+		res := 1
+	<b>else</b>
+		<b>var</b> k: <b>int</b>
+		k := -10
+		<b>for</b> n <b>to</b> (n+3) <b>do</b> 
+			<b>for</b> i := 1 <b>to</b> n <b>do</b>
+				k := k + i
+				<b>for</b> j := 1 <b>to</b> n <b>do</b>
+					6_b(k div 2)
+					k := k + 1
+				<b>od</b>
+			<b>od</b>
+		<b>od</b>
+	res := k
+	<b>fi</b>
+<b>end fun</b>
+</code></pre>
+
+```pascal
+Nuevamente no nos importa que hace.
+Tenemos 2 casos:
+t(n) | 1 si n<=1
+	 | a *(n/b) + g(n)
+Donde
+a=4 (por el for n to n+3), b=2(por el div 2), k=2 (por que hay 2 for que iteran hasta n)
+
+Entonces 4 = 2² => n^k log n => n² log n
 
 
 
+
+c) 3^n
+Entonces queremos que a<b^k
+Especificamente que Σ 1 to 3
+Entonces, partamos de la base del ej 6b
+```
+
+<pre><code>
+<b>fun</b> 6_b(<b>in</b> n:<b>nat</b>), <b>ret</b> res:<b>nat</b>
+	<b>if</b> n &lt;= 1 <b>then</b>
+		res := 1
+	<b>else</b>
+		<b>var</b> k: <b>int</b>
+		k := -10
+		<b>for</b> 1 <b>to</b> 3 <b>do</b> 
+			k := k + 1
+			<b>for</b> n <b>to</b> n^n <b>do</b>
+				6_b(k div 2)
+			<b>od</b>
+		<b>od</b>
+	res := k
+	<b>fi</b>
+<b>end fun</b>
+</code></pre>
+
+```pascal
+Obviemos lo que hace, tenemos 2 casos:
+t(n) = | 1 si n<=1
+	   | a*(n/b) + g(n)
+Donde
+a=3 (porque Σ1 to 3), b=2 (por el div 2), k=n (porque no hay nada)
+=> 3 < 2^n => n^k => 3^n (si al menos n>=2 tiene este orden)
+```
+
+![ScreenShot](Imagenes%20practico%201.3/ej7.png)
+
+```pascal
+El orden ciclico toma un arreglo y un natural i el cual indica en que parte se corta el arreglo. Si el arreglo esta ordenado desde a[i] hasta a[n] y luego desde a[1] hasta a[i-1] decimos que es ciclico
+En el ejemplo [5, 6, 7, 8, 9, 1, 2, 3, 4] con i=6 vemos que desde a[i] (o sea a[1]) hasta a[n] esta ordenado (o sea 1, 2, 3, 4) Luego vemos desde a[1] hasta a[i-1] (o sea 5, 6, 7, 8, 9). Si tambien esta ordenado entonces es ciclico
+
+Otro ejemplo seria [3,4,5,6,1,2] con i=5 ya que [1, 2] esta ordenado y luego [3, 4, 5, 6] tambien.
+Por lo tanto podemos afirmar que i es el menor elemento del arrego y de la secuencia
+
+Como la consigna luego pide buscar el minimo elemento (i) asumo que para el a) no es necesario y que se pasa como argumento:
+```
+
+<pre><code>
+<b>fun</b> orden_ciclico(<b>in</b> a:<b>array[1..N]</b> of <b>T</b>, <b>in</b> i:<b>nat</b>), <b>ret</b> res:<b>bool</b>
+	<b>var</b> j:<b>nat</b>
+	j := i
+	res := true
+	<b>while</b> i &lt; n <b>do</b>
+		<b>if</b> a[i] &gt;= a[i+1] <b>then</b>
+			res := false
+		<b>fi</b>
+		i := i + 1
+	<b>od</b>
+
+	<b>if</b> res != false <b>then</b>
+		<b>for</b> k:=1 <b>to</b> j-2 <b>do</b>
+			<b>if</b> a[k] &gt;= a[k+1] <b>then</b>
+				res := false
+			<b>fi</b>
+		<b>od</b>
+	<b>fi</b>
+<b>end fun</b>
+</code></pre>
+
+```pascal
+Veamos con el ejemplo de antes: a[3,4,5,6,1,2], i=5
+j=5, res=true
+5 < 6 si =>
+	a[5] >= a[6] no
+	i=6
+6 < 6 no
+
+res != false si
+	1 <= 3 si
+		a[1] >= a[2] no
+	2 <= 3 si
+		a[2] >= a[3] no
+	3 <= 3 si
+		a[3] >= a[4] no
+	4 <= 3 no
+
+res=true
+
+
+
+b) Ahora nos pide que hagamos un algoritmo que busque el menor elemento (indice i) en un arreglo que nos pasan que ya es ciclico. Tenemos que usar busqueda secuencial, o sea posicion a posicion comparando con en el elemento que buscamos (o sea el menor) y devolvemos en indice en caso que lo encontremos
+Entonces la idea es basicamente encontrar el menor elemento y listo, puedo tomar el primero como menor y utilizarlo secuencialmente para comparar.
+```
+
+<pre><code>
+<b>fun</b> devuelvo_menor(<b>in</b> a:<b>array[1..N]</b> of <b>T</b>), <b>ret</b> res:<b>nat</b>
+	<b>var</b> min, pos:<b>int</b>
+	min := a[1]
+	
+	<b>if</b> n &lt; 2 <b>then</b>
+		pos := 1
+	<b>else</b>
+		<b>for</b> i:=2 <b>to</b> n <b>do</b>
+			<b>if</b> a[i] &lt; min <b>then</b>
+				min := a[i]
+				pos := i
+			<b>fi</b>
+		<b>od</b>
+	<b>fi</b>
+	res := pos
+<b>end fun</b>
+</code></pre>
+
+```pascal
+a[3,4,5,6,1,2]
+min=3
+if 6 < 2 no
+else
+	1 < 6 si
+		4 < 3 no
+	2 < 6 si
+		5 < 3 no
+	3 < 6 si
+		6 < 3 no
+	4 < 6 si
+		1 < 3 si => min=1, pos=1
+	5 < 6 si
+		2 < 1 no
+	
+	pos = res = 1
+```
