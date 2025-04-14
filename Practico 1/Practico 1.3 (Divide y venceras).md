@@ -607,4 +607,37 @@ else
 		2 < 1 no
 	
 	pos = res = 1
+
+
+
+c) Nos pide hacer lo mismo pero con busqueda binaria
+```
+
+<pre><code>
+<b>fun</b> devuelvo_menor_binaria(<b>in</b> a:<b>array[1..N]</b> of <b>T</b>, <b>in</b> min:<b>int</b>, <b>in</b> lft, rgt:<b>nat</b>), <b>ret</b> res:<b>nat</b>
+	<b>var</b> min_aux:<b>int</b>
+	lft := 1
+	rgt := n
+	min_aux := a[lft]
+	<b>if</b> lft &lt; rgt <b>then</b>
+		res := 1
+	<b>else</b>
+		mid := (lft + rgt) / 2
+			<b>if</b> a[mid] &lt; min_aux <b>then</b>
+				min := mid
+				min_aux := min
+				devuelvo_menor_binaria(a, min, lft, mid-1)
+			<b>else</b> a[mid] &gt; min <b>then</b>
+				devuelvo_menor_binaria(a, min, mid+1 rgt)
+			<b>else</b>
+				res := mid 
+			<b>fi</b>
+	<b>fi</b>
+<b>end fun</b>
+</code></pre>
+
+```pascal
+Veamos con a[3,4,5,6,1,2]
+lft=1, rgt=6, min_aux=a[1]=3
+
 ```
