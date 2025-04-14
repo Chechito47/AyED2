@@ -614,23 +614,30 @@ c) Nos pide hacer lo mismo pero con busqueda binaria
 ```
 
 <pre><code>
+<b>proc</b> inicializo_min(<b>in</b> a:<b>array[1..N]</b> of <b>T</b>, <b>out</b> min:<b>int</b>)
+	min := a[1]
+	devuelvo_menor_binaria(a, min, 1, N)
+<b>end proc</b>
+
+
+
 <b>fun</b> devuelvo_menor_binaria(<b>in</b> a:<b>array[1..N]</b> of <b>T</b>, <b>in</b> min:<b>int</b>, <b>in</b> lft, rgt:<b>nat</b>), <b>ret</b> res:<b>nat</b>
 	<b>var</b> min_aux:<b>int</b>
 	lft := 1
 	rgt := n
-	min_aux := a[lft]
-	<b>if</b> lft &lt; rgt <b>then</b>
-		res := 1
+	min_aux := lft
+	<b>if</b> lft &lt;= rgt <b>then</b>
+		res := min_aux
 	<b>else</b>
 		mid := (lft + rgt) / 2
-			<b>if</b> a[mid] &lt; min_aux <b>then</b>
-				min := mid
-				min_aux := min
+			<b>if</b> a[mid] &lt; min <b>then</b>
+				min := a[mid]
+				min_aux := mid
 				devuelvo_menor_binaria(a, min, lft, mid-1)
 			<b>else</b> a[mid] &gt; min <b>then</b>
 				devuelvo_menor_binaria(a, min, mid+1 rgt)
 			<b>else</b>
-				res := mid 
+				res := mid
 			<b>fi</b>
 	<b>fi</b>
 <b>end fun</b>
@@ -638,6 +645,44 @@ c) Nos pide hacer lo mismo pero con busqueda binaria
 
 ```pascal
 Veamos con a[3,4,5,6,1,2]
-lft=1, rgt=6, min_aux=a[1]=3
+inicializo_min:
+	min = a[1] = 3
+	devuelvo_menor_binaria(a, 3, 1, 6)
 
+ devuelvo_menor_binaria:
+ lft=1, rgt=6, min_aux=1
+ if 1 <= 6 no
+else
+	mid = (1+6)/2=3
+	if 5 < 3 no
+	if 5 > 3 si
+		devuelvo_menor(a, 3, 4, 6)
+
+lft=4, rgt=6, min_aux=4
+if 4 >= 6 no
+else
+	mid = (4+6)/2=5
+	if 1 < 3 si
+		min = 1
+		min_aux = 5
+		devuelvo_menor_binaria(a, 1, 4, 4)
+
+lft=4, rgt=4, min_aux=a[4]=6
+if 4 >= 4 si
+	res = min = 5
+=> a[5] = 1 que es el min
+
+
+
+Veamos con [5, 6, 7, 8, 9, 1, 2, 3, 4] que debe dar min=6
+inicializo_min:
+min:=a[1]=5
+devuelvo_menor_binaria(a, 5, 1, 9)
+
+lft=1, rgt=9, min_aux=1
+if 1>=9 no
+else
+	mid = (1+9)/2=5
+	if 9 < 5 no
+	if 9 > 5 si
 ```
