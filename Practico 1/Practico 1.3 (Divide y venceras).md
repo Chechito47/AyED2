@@ -622,17 +622,14 @@ c) Nos pide hacer lo mismo pero con busqueda binaria
 
 
 <b>fun</b> devuelvo_menor_binaria(<b>in</b> a:<b>array[1..N]</b> of <b>T</b>, <b>in</b> min:<b>int</b>, <b>in</b> lft, rgt:<b>nat</b>), <b>ret</b> res:<b>nat</b>
-	<b>var</b> min_aux:<b>int</b>
 	lft := 1
 	rgt := n
-	min_aux := lft
 	<b>if</b> lft &lt;= rgt <b>then</b>
-		res := min_aux
+		res := lft
 	<b>else</b>
 		mid := (lft + rgt) / 2
 			<b>if</b> a[mid] &lt; min <b>then</b>
 				min := a[mid]
-				min_aux := mid
 				devuelvo_menor_binaria(a, min, lft, mid-1)
 			<b>else</b> a[mid] &gt; min <b>then</b>
 				devuelvo_menor_binaria(a, min, mid+1 rgt)
@@ -650,7 +647,7 @@ inicializo_min:
 	devuelvo_menor_binaria(a, 3, 1, 6)
 
  devuelvo_menor_binaria:
- lft=1, rgt=6, min_aux=1
+ lft=1, rgt=6
  if 1 <= 6 no
 else
 	mid = (1+6)/2=3
@@ -658,19 +655,19 @@ else
 	if 5 > 3 si
 		devuelvo_menor(a, 3, 4, 6)
 
-lft=4, rgt=6, min_aux=4
+lft=4, rgt=6
 if 4 >= 6 no
 else
 	mid = (4+6)/2=5
 	if 1 < 3 si
 		min = 1
-		min_aux = 5
 		devuelvo_menor_binaria(a, 1, 4, 4)
 
-lft=4, rgt=4, min_aux=a[4]=6
+lft=4, rgt=4
 if 4 >= 4 si
 	res = min = 5
 => a[5] = 1 que es el min
+
 
 
 
@@ -679,10 +676,65 @@ inicializo_min:
 min:=a[1]=5
 devuelvo_menor_binaria(a, 5, 1, 9)
 
-lft=1, rgt=9, min_aux=1
+lft=1, rgt=9
 if 1>=9 no
 else
 	mid = (1+9)/2=5
 	if 9 < 5 no
 	if 9 > 5 si
+		devuelvo_menor_binaria(a, 5, 6, 9)
+
+lft=6, rgt=9
+if 6 >= 9 no
+else
+	mid = (6+9)/2=7
+	if 2 < 5 si
+		min=2
+		devuelvo_menor_binaria(a, 2, 6, 6)
+
+lft=6, rgt=6
+if 6 >= 6 si
+	res = 6 => a[6]=1
+
+
+
+d)Nos pide calcular el orden de complejidad:
+Para orden_ciclico vemos que no es DyV porque no se llama a si misma.
+Por lo tanto lo puedo hacer de la manera normal:
+
+ops(7.a) = Σi to n (Σ1 to i-2)
+		 = Σi to n (i-2)
+		 = i-1
+Entonces tiene orden n (n-1 donde el -1 es despreciable)
+
+
+
+devuelvo_menor:
+Vemos que tampoco es DyV, calculo normalmente:
+ops(7.b) = Σ2 to n
+		 = n-1
+Entonces tiene orden n
+
+
+
+devuelvo_menor_binaria:
+Vemos que si es DyV:
+t(n) = | lft si lft <= rgt
+	   | a*t(n/b) + g(n)
+a=1 (nro de llamadas recursivas)
+b=3 (por la cantidad de casos en que divido)
+k=0 (no hay ningun orden)
+
+=> 1 =3⁰ => n^k log n => n⁰ log n => log n
+```
+
+![ScreenShot](Imagenes%20practico%201.3/ej8.png)
+
+```pascal
+Es DyV porque se llama a si misma con un orden menor
+
+t(n) = | skip si n<=1
+	   | a *t(n/b) + g(n) 
+
+a=
 ```
