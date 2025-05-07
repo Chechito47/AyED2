@@ -97,3 +97,71 @@ operations
 	{- PRE: not is_empty_stack(s) -}
 end spec
 ```
+
+
+## Arboles binarios
+### Constructores
+- Arbol vacio
+- Nodo consistente de un elemento tipo T y dos arboles
+
+Aclaraciones: 
+1. Un nodo es un arbol no vacio que tiene raiz, subarbol derecho e izquierdo
+2. A los subarboles tambien se los llama hijos(izq y der) (el nodo es su padre)
+3. Una hoja es un nodo con los dos hijos vacios
+4. Se usa la terminologia hijo, padre, nieto, abuelo, hermanos, ancestro, descendiente
+5. Tambien se usa camino, altura, profundidad y nivel
+
+### Niveles
+Nivel 1 -> hay a lo sumo 1 nodo  
+Nivel 2 -> hay a lo sumo 2 nodos  
+Nivel 3 -> hay a lo sumo 4 nodos  
+Nivel 4 -> hay a lo sumo 8 nodos  
+Nivel i -> hay a lo sumo 2^(i−1) nodos  
+Arbol de altura n hay a lo sumo:  
+	2⁰ + 2¹ + . . . + 2^(n−1) = 2^n − 1 nodos  
+En un árbol “balanceado” la altura es del orden del log₂ k donde k es el número de nodos  
+
+### Camino
+Lo podemos representar como la secuencia donde cada elemento nos indica si debo bajar a la izquierda o derecha
+
+## TAD Arbol binario
+
+```pascal
+spec Tree of T where
+
+constructors
+	fun empty_tree() ret t : Tree of T
+	{- crea una árbol vacío. -}
+	
+	fun node (tl : Tree of T, e : T, tr : Tree of T) ret t : Tree of T
+	{- crea el nodo con elemento e y subárboes tl y tr. -}
+
+operations
+	fun is_empty_tree(t : Tree of T) ret b : Bool
+	{- Devuelve True si el árbol es vacío -}
+
+	fun root(t : Tree of T) ret e : T
+	{- Devuelve el elemento que se encuentra en la raíz de t. -}
+	{- PRE: not is_empty_tree(t) -}
+
+	fun left(t : Tree of T) ret tl : Tree of T
+	{- Devuelve el subárbol izquierdo de t. -}
+	{- PRE: not is_empty_tree(t) -}
+
+	fun right(t : Tree of T) ret tl : Tree of T
+	{- Devuelve el subárbol derecho de t. -}
+	{- PRE: not is_empty_tree(t) -}
+	
+	fun height(t : Tree of T) ret n : Nat
+	{- Devuelve la distancia que hay entre la raíz de t y la hoja más profunda -}
+
+	fun is_path(t : Tree of T, p : Path) ret b : Bool
+	{- Devuelve True si p es un camino válido en t -}
+	
+	fun subtree_at(t : Tree of T, p : Path) ret t0 : Tree of T
+	{- Devuelve el subárbol que se encuentra al recorrer el camino p en t . -}
+	
+	fun elem_at(t : Tree of T, p : Path) ret e : T
+	{- Devuelve el elemento que se encuentra al recorrer el camino p en t . -}
+	{- PRE: is_path(t,p) -}
+```

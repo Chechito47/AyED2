@@ -438,3 +438,6 @@ Devuelvo el elemento q.start
 	q.start := (q.start + 1) % N
 	q.size := q.size - 1
 <b>end proc</b></code></pre>
+
+![ScreenShot](Imagenes%20practico%202.3/ej4.png)
+
