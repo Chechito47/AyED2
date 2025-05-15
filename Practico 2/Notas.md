@@ -165,3 +165,49 @@ operations
 	{- Devuelve el elemento que se encuentra al recorrer el camino p en t . -}
 	{- PRE: is_path(t,p) -}
 ```
+
+
+## TAD Set
+```pascal
+spec Set of T where
+
+constructors
+	fun empty_set() ret s : Set of T
+	{- Crea un conjunto vacío -}
+	
+	proc add(in/out s : Set of T, in e : T)
+	{- Agrega el elemento e al conjunto s -}
+
+destroy
+	proc destroy_set(in/out s : Set of T)
+	{- Libera memoria en caso que sea necesario. -}
+
+operations
+	fun cardinal(s : Set of T) ret n : nat
+	{- Devuelve la cantidad de elementos que tiene s -}
+	
+	fun is_empty_set(s : Set of T) ret b : bool
+	{- Devuelve True si s es vacío -}
+	
+	fun member(e : T, s : Set of T) ret b : bool
+	{- Devuelve True si el elemento e pertenece al conjunto s -}
+	
+	proc elim(in/out s : Set of T, in e : T)
+	{- Elimina el elemento e del conjunto s, en caso que esté -}
+	
+	proc union(in/out s : Set of T, in s0 : Set of T)
+	{- Agrega a s todos los elementos de s0 -}
+	
+	proc inters(in/out s : Set of T, in s0 : Set of T)
+	{- Elimina de s todos los elementos que NO pertenezcan a s0 -}
+	
+	proc diff(in/out s : Set of T, in s0 : Set of T)
+	{- Elimina de s todos los elementos que pertenecen a s0 -}
+	
+	fun get(s : Set of T) ret e : T
+	{- Obtiene algún elemento cualquiera del conjunto s -}
+	{- PRE: not is_empty_set(s) -}
+	
+	fun copy_set(s1 : Set of T) ret s2 : Set of T
+	{- Copia el conjunto s1 -}
+```
