@@ -236,7 +236,7 @@ queden elimino la lista aux -}
 	res := empty_list()
 	tiempo_trans := 0
 
-	<b>while not</b> empty_set(S_aux) <b>do</b>
+	<b>while not</b> is_empty_set(S_aux) <b>do</b>
 		b := elegir_ballena()
 		addr(res, b)
 		elim(S_aux, b)
@@ -283,7 +283,7 @@ esa ballena ya esta muerta, entonces la descarto de la lista -}
 
 	S_aux := copy_set(S)
 
-	<b>while not</b> empty_set(S_aux) <b>do</b>
+	<b>while not</b> is_empty_set(S_aux) <b>do</b>
 		b := get(S_aux)
 		<b>if</b> b.tiempo_sup &lt; t <b>then</b>
 			elim(S, b)
@@ -347,7 +347,7 @@ ya se lo preste y lo descarto de la lista de amigos a los que todavia no -}
 	S_aux := copy_set(S)
 	res := empty_list()
 
-	<b>while not</b> empty_set(S_aux) <b>do</b>
+	<b>while not</b> is_empty_set(S_aux) <b>do</b>
 		a := elegir_amigo(S_aux)
 		dia_regreso := a.fecha_regreso
 		addr(res, a)
@@ -371,7 +371,7 @@ a los que no sirven -}
 	S_aux := copy_set(S)
 	menor_dia_regreso := ∞
 
-	<b>while not</b> empty_set(S_aux) <b>do</b>
+	<b>while not</b> is_empty_set(S_aux) <b>do</b>
 		a := get(S_aux)
 		<b>if</b> a.fecha_regreso &lt; menor_dia_regreso <b>then</b>
 			menor_dia_regreso := a.fecha_regreso
@@ -392,7 +392,7 @@ descartado -}
 
 	S_aux := copy_set(S)
 
-	<b>while not</b> empty_set(S_aux) <b>do</b>
+	<b>while not</b> is_empty_set(S_aux) <b>do</b>
 		a := get(S_aux)
 		<b>if</b> a.fecha_partida &lt;= fecha_regreso <b>then</b>
 			elim(S, a)
@@ -401,3 +401,112 @@ descartado -}
 	<b>od</b>
 	destroy_set(S_aux)
 <b>end proc</b></code></pre>
+
+![ScreenShot](Imagenes%20practico%203.1/criterios.png)
+![ScreenShot](Imagenes%20practico%203.1/ej6.png)
+
+```pascal
+- Datos:
+Tenemos que abrir el horno la menor cantidad de veces posible. No hay que sacar las cosas antes de tiempo o despues de tiempo.
+El horno tiene n piezas de panaderia.
+Cada pieza i tiene un tiempo minimo de coccion ti, un tiempo maximo admisible de coccion Ti
+Abrir y extraer del horno no consumo tiempo
+ti <= Ti para todo i
+
+- Criterio de seleccion: Abro cuando tenga una pieza al limite de su tiempo maximo de coccion y saco todas las que ya se hayan cocinado.
+
+- Estructuras de datos:
+Planteo una tupla de 3 elementos: uno para un identificador, uno con el tiempo minimo de coccion y otro con el tiempo maximo.
+```
+
+<pre><code><b>type</b> Piezas := <b>tuple</b>
+						id: nat
+						t_min: nat
+						t_max: nat
+					<b>end tuple</b>
+
+{- PRE: ti &lt;= Ti -}
+<b>fun</b> Abrir_horno(S: Set <b>of</b> Piezas) <b>ret</b> res: nat</code></pre>
+
+```pascal
+La funcion principal tiene como precondicion (no la necesito chequear, por eso es PRE) que ti <= Ti para todo i que este en el conjunto del horno.
+Entonces, la funcion toma el conjunto de piezas del horno y debe devolver la cantidad de veces que el horno fue abierto.
+
+- Descripcion de la solucion:
+El algoritmo elige la pieza que este a punto de quemarse, abre el horno y saca esa + las que ya se hayan cocinado. Repite este proceso hasta terminar con todas las piezas
+
+- Implementacion:
+```
+
+<pre><code><b>type</b> Piezas := <b>tuple</b>
+						id: nat
+						t_min: nat
+						t_max: nat
+					<b>end tuple</b>
+
+{- PRE: ti &lt;= Ti -}
+{- Mientras todavia haya piezas en el horno lo abro cuando haya una 
+	pieza a punto de quemarse, esa si o si la elimino del conjunto
+	auxiliar porque si o si la saco, actualizo el tiempo, descarto 
+	las que pude sacar cuando abri el horno y aumento la cantidad
+	de veces que abri el horno -}
+<b>fun</b> Abrir_horno(S: Set <b>of</b> Piezas) <b>ret</b> res: nat
+	<b>var</b> S_aux: Set <b>of</b> Piezas
+	<b>var</b> s_aux: Piezas
+	<b>var</b> tiempo_trans: nat
+
+	S_aux := copy_set(S)
+	tiempo_trans := 0
+	res := 0
+
+	<b>while not</b> is_empty_set(S_aux) <b>do</b>
+		s := elegir_pieza(S_aux)
+		elim(S_aux, s)
+		tiempo_trans := tiempo_trans + s.t_max
+		descartar_cocinadas(S_aux, tiempo_trans)
+		res := res + 1
+	<b>od</b>
+	 destroy_set(S_aux)
+<b>end fun</b>
+
+
+{- Uso get para obtener una pieza, si su tiempo de coccion maximo
+	permitido es menor al de las otras elijo esa pieza -}
+<b>fun</b> elegir_pieza(S: Set <b>of</b> Piezas) <b>ret</b> res: Piezas
+	<b>var</b> S_aux: Set <b>of</b> Piezas
+	<b>var</b> s_aux: Piezas
+	<b>var</b> tiempo_en_horno: nat
+
+	S_aux := copy_set(S)
+	tiempo_en_horno := ∞
+
+	<b>while not</b> is_empty_set(S_aux) <b>do</b>
+		s_aux := get(S_aux)
+		<b>if</b> s_aux.t_max &lt;= tiempo_en_horno <b>then</b>
+			tiempo_en_horno := s_aux.t_max
+			res := s_aux
+		<b>fi</b>
+	<b>od</b>
+	destroy_set(S_aux)
+<b>end fun</b>
+
+
+{- Me fijo si hay piezas tales que el tiempo transcurrido sea mayor
+	a su tiempo minimo de coccion y menor a su tiempo maximo
+	de coccion. Si es asi elimino dicha pieza -}
+<b>proc</b> descartar_cocinadas(<b>in/out</b> S: Set <b>of</b> Piezas, <b>in</b> tiempo_trans)
+	<b>var</b> S_aux: Set <b>of</b> Piezas
+	<b>var</b> s_aux: Piezas
+
+	S_aux := copy_set(S)
+
+	<b>while not</b> is_empty_set(S_aux) <b>do</b>
+		s_aux := get(S_aux)
+		<b>if</b>s_aux.t_min &lt;= tiempo_trans && s_aux.t_max &gt;= tiempo_trans <b>then</b>
+			elim(S, s_aux)
+		<b>fi</b>
+			elim(S_aux, s_aux)
+		<b>od</b>
+	destroy_set(S_aux)
+<b>end proc</b></code></pre>
+
